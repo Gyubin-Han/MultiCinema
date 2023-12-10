@@ -1,0 +1,118 @@
+@charset "UTF-8";
+
+#myComment {
+ 	padding: 10px;
+ 	margin-bottom: 10px;
+ 	text-align: center;
+ 	border-collapse: collapse;
+}
+
+#myComment table, th, tr, td {
+	margin: 0;
+	padding: 0;
+	border: none;
+	border-collapse: collapse;
+}
+
+#myComment tr {
+	height: 60px;
+}
+
+#comment {
+	width: 300px;
+	height: 50px;
+}
+
+#myComment th {
+	background-color: silver;
+}
+#myComment tr:nth-child(even) {
+	background-color:rgb(255, 255, 219);
+}
+
+#username {
+	width: 80px;
+}
+
+#movietitle {
+	width: 160px;
+}
+
+#rating {
+	width: 50px;
+}
+
+#day {
+	width: 100px;
+}
+
+#update {
+	width: 100px;
+}
+
+
+#reviewBoard {
+	width: 1000px;
+}
+#reviewBoard table {
+	margin-top: 20px;
+	width: 100%;
+}
+
+#reviewBoard th {
+	height: 20px;
+	background-color: silver;
+}
+
+#reviewBoard tr {
+	border-bottom: 1px solid black;
+	height: 50px;
+}
+
+/*"thBno", "thMovieTitle", "thWriter", "thBoardTitle", "thLikeCount", "thCommentCount", "thWriteDay"*/
+
+#thBno {width: 50px;}
+#thMovieTitle {width: 200px;}
+#thWriter {width: 50px;}
+#thBoardTitle {width: 300px;}
+#thLikeCount {width: 30px;}
+#thCommentCount {width: 30px;}
+#thWriteDay {width: 100px;}
+
+
+#reviewBoard table, th, tr, td {
+	margin: 0;
+	padding: 0;
+	border: none;
+	border-collapse: collapse;
+}
+
+#reviewContent {
+	min-height: 500px;
+	display: flex;
+	align-items: center;
+}
+
+#board {
+	margin: 20px;
+}
+#likeControl p, img{
+	text-align: center;
+}
+
+#writeReviewComment {
+	display: flex;
+	flex-direction: 'column';
+	align-items: center;
+	text-align: center;
+}
+
+#writeReviewComment textarea {
+	width: 500px;
+	height: 200px;
+	margin: 20px;
+	margin-left: 20px;
+	margin-right: 40px;
+	
+	resize: none;
+}

@@ -1,5 +1,15 @@
 package com.mc.multicinema.reviewboard.dto;
 
+import org.springframework.stereotype.Component;
+
+/**
+ * 
+ * @author JIN
+ * 23-12-08 15:36 board_view_count, is_deleted, deleted_date
+ * 필드 게터 세터 추가 완료 
+ *
+ */
+@Component
 public class ReviewBoardDTO {
 	
 	int board_num;
@@ -13,7 +23,28 @@ public class ReviewBoardDTO {
 	int board_dislike_count;
 	int board_comment_count;
 	
+	int board_view_count;
+	boolean is_deleted;
+	String deleted_date;
 	
+	public int getBoard_view_count() {
+		return board_view_count;
+	}
+	public void setBoard_view_count(int board_view_count) {
+		this.board_view_count = board_view_count;
+	}
+	public boolean isIs_deleted() {
+		return is_deleted;
+	}
+	public void setIs_deleted(boolean is_deleted) {
+		this.is_deleted = is_deleted;
+	}
+	public String getDeleted_date() {
+		return deleted_date;
+	}
+	public void setDeleted_date(String deleted_date) {
+		this.deleted_date = deleted_date;
+	}
 	public int getBoard_num() {
 		return board_num;
 	}
@@ -75,5 +106,14 @@ public class ReviewBoardDTO {
 		this.board_comment_count = board_comment_count;
 	}
 	
+	@Override
+	public String toString() {
+		return "ReviewBoardDTO [board_num=" + board_num + ", user_key=" + user_key + ", movie_cd=" + movie_cd
+				+ ", board_write_date=" + board_write_date + ", board_title=" + board_title + ", board_content="
+				+ board_content + ", board_update_date=" + board_update_date + ", board_like_count=" + board_like_count
+				+ ", board_dislike_count=" + board_dislike_count + ", board_comment_count=" + board_comment_count
+				+ ", board_view_count=" + board_view_count + ", is_deleted=" + is_deleted + ", deleted_date="
+				+ deleted_date + "]";
+	}
 	
 }

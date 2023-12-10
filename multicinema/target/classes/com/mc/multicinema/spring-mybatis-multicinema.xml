@@ -11,13 +11,16 @@
 			<property name="username" value="backend"/>
 			<property name="password" value="backend"/>
 	</bean>
+	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
 		<property name="configLocation" value="classpath:com/mc/multicinema/mybatis-config.xml"/>
-		<property name="mapperLocations" value="classpath:com/mc/multicinema/xmlmapping/*-mapping.xml"/>
+		<property name="mapperLocations" value="classpath:com/mc/multicinema/sql/*-mapping.xml"/>
 	</bean>
+	
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory"/>
 	</bean>
+	
 	<context:component-scan base-package="com.mc.multicinema"/>
 </beans>
