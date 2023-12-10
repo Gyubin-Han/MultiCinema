@@ -8,7 +8,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 		/WEB-INF/spring/root-context.xml
-		classpath:com.mc.multicinema/spring-mybatis-multicinema.xml
+		classpath:com/mc/multicinema/spring-mybatis-multicinema.xml
 		</param-value>
 	</context-param>
 	

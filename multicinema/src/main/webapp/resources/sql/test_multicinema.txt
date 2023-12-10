@@ -106,7 +106,10 @@ CREATE TABLE `review_board` (
 	`board_update_date`	datetime	NOT NULL	COMMENT '수정날짜',
 	`board_like_count`	int	NULL	DEFAULT 0	COMMENT '좋아요수',
 	`board_dislike_count`	int	NULL	DEFAULT 0	COMMENT '싫어요수',
-	`board_comment_count`	int	NULL	DEFAULT 0	COMMENT '댓글수'
+	`board_comment_count`	int	NULL	DEFAULT 0	COMMENT '댓글수',
+    `board_view_count`	int	NULL	DEFAULT 0	COMMENT '조회수',
+    `is_deleted`	boolean	NULL	DEFAULT false	COMMENT '삭제여부',
+	`deleted_date`	datetime	NULL	COMMENT '삭제날짜'
 );
 
 ALTER TABLE `review_board` ADD CONSTRAINT `PK_REVIEW_BOARD` PRIMARY KEY (
