@@ -8,60 +8,94 @@ import org.springframework.stereotype.Service;
 
 import com.mc.multicinema.moviecomment.dao.MovieCommentDAO;
 import com.mc.multicinema.moviecomment.dto.MovieCommentDTO;
+import com.mc.multicinema.moviecomment.dto.MovieCommentSortDTO;
 
-/**
- * 
- * @author JIN
- * search
- * 모든 list를 반환하거나 comment_num, user_key, movie_cd를 검색해 반환하는 list
- * 	ex) HashMap<String, Integer> map = new HashMap<String, Integer>();
- * 		map.put("search", comment_num | user_key | movie_cd);
- * 		map.put("key", search_value)
- * 		selectMovieComment(map);
- * insert
- * 한 영화에 한 한줄평만 남기게끔 하는 기능 구현 
- * HashMap<String, Integer> map = new HashMap<String, Integer>();
- * 		map.put("user_key", user_key);
- * 		map.put("movie_cd", movie_cd);
- * 		selectMovieCommentCheck(map);
- * 										! 시간 되면 paging 기능 구현 필요
- * 
- * 
- */
 @Service
-public class MovieCommentServiceImpl implements MovieCommentService {
-
+public class MovieCommentServiceImpl implements MovieCommentService{
 	@Autowired
 	MovieCommentDAO dao;
 	
 	@Override
-	public List<MovieCommentDTO> selectMovieCommentAll() {
-		return dao.selectMovieCommentAll();
-	}
-
-	@Override
-	public List<MovieCommentDTO> selectMovieComment(HashMap<String, Integer> map) {
-		return dao.selectMovieComment(map);
-	}
-
-	@Override
-	public boolean selectMovieCommentCheck(HashMap<String, Integer> map) {
-		return dao.selectMovieCommentCheck(map) != 0 ? true : false;
-	}
-
-	@Override
-	public String insertMovieComment(MovieCommentDTO dto) {
+	public int insertMovieComment(MovieCommentDTO dto) {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("user_key", dto.getUser_key());
 		map.put("movie_cd", dto.getMovie_cd());
-		if(selectMovieCommentCheck(map))
-			return "한 영화당 한 한줄평만 남길 수 있습니다.";
 		
-		if(dao.insertMovieComment(dto) == 1)
-			return "한줄평이 정상적으로 등록되었습니다.";
-		else 
-			return "알 수 없는 오류로 인해 등록에 실패하였습니다.\n관리자에게 문의하세요.";
+		System.out.println("============="+dto.getUser_key() +"/"+ dto.getMovie_cd()+"=============");
+		MovieCommentDTO result = dao.selectOneMovieComment(map);
+		if(result != null) {
+			System.out.println("=============이미 존재=============");
+			return -2;
+		}else {
+			System.out.println("else 들어감");
+			return dao.insertMovieComment(dto);
+		}
+		
 	}
 
+	@Override
+	public String likeAdd(Integer comment_num, Integer user_key) {
+		System.out.println("=================ser comnum:"+comment_num + "/" + "uskey" + user_key +"================");
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("comment_num", comment_num);
+		map.put("user_key", user_key);
+		System.out.println("=================ser map comnum:"+map.get("comment_num")+ "/" + "uskey" + map.get("user_key") +"================");
+		String res = dao.selectOneLike(map);
+		if(res == null) {
+			int isrtResult = dao.insertOneLike(map);
+			int udtResult = dao.updateOneLike(map);
+			if(isrtResult == -1) {
+				//롤백
+				return "insertOneLike 오류";
+			}if(udtResult  == -1) {
+				//롤백
+				return "udtResultOneLike 오류";
+			}else {
+				return "좋아요 추가성공";
+			}
+		}else {
+			return "중복";
+		}
+		
+	}
+
+	@Override
+	public int deleteComment(int comment_num) {
+		
+		int res = dao.deleteCommentLike(comment_num);
+		System.out.println("===============ser: " + res + "=========================");
+		if(res == -1) {
+			return -2;
+		}else {
+			return dao.deleteComment(comment_num);
+		}
+		
+	}
+
+	@Override
+	public int updateMovieComment(MovieCommentDTO dto) {
+		return dao.updateMovieComment(dto);	 
+	}
+	
+	@Override
+	public List<MovieCommentDTO> movieCommentsInit(String movie_cd) {
+		String commentsCount = "10";
+		System.out.println("service movieCommentInit 작동" + movie_cd);
+		return dao.selectMovieCommentsInit(movie_cd, commentsCount);
+		
+	}
+
+	@Override
+	public List<MovieCommentDTO> moreComment(MovieCommentSortDTO dto) {
+
+		return dao.selectListComment(dto);
+		
+	}
+
+	@Override
+	public List<MovieCommentDTO> sortComment(MovieCommentSortDTO dto) {
+		
+		return dao.selectListComment(dto);
+	}
 	
 }

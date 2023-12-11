@@ -1,8 +1,11 @@
 package com.mc.multicinema.movieinfo.dto;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class MovieDTO {
 	
-	String movie_cd;
+	int movie_cd;
 	String movie_title;
 	String movie_img_src;
 	String movie_spec;
@@ -15,10 +18,10 @@ public class MovieDTO {
 	int movie_limitAge;
 	
 	
-	public String getMovie_cd() {
+	public int getMovie_cd() {
 		return movie_cd;
 	}
-	public void setMovie_cd(String movie_cd) {
+	public void setMovie_cd(int movie_cd) {
 		this.movie_cd = movie_cd;
 	}
 	public String getMovie_title() {
