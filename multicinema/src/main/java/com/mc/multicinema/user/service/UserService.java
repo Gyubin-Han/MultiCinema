@@ -4,15 +4,15 @@ import java.util.List;
 
 import com.mc.multicinema.user.dto.UserDTO;
 
-/**
- * 
- * @author JIN
- * 전체 유저 가져오는 리스트, 한 개의 유저 가져오는 셀렉트 작성
- *
- */
 public interface UserService {
-	
+
+	UserDTO loginProcess(String user_id, String user_pw);
+
+	List<UserDTO> memberCheckProcess(String user_id, String user_email);
+
+	int memberJoinProcess(UserDTO dto);
+
 	List<UserDTO> selectUserAll();
-	
+		
 	UserDTO selectUserOne(int user_key);
 }
