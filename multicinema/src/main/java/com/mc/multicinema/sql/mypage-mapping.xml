@@ -21,25 +21,40 @@ select * from user_info where user_key=#{user_key}
 select user_pw from user_info where user_id = #{user_id}
 </select>
 	<!--  내가 본 무비 객체 다가져오기 -->
-<select id="pagingMovieList" resultType="moviehistorydto" parameterType="int">
-select movie_info.movie_title, movie_info.movie_img_url, ticketing.ticketing_num, ticketing.sch_time
+
+<select id="pagingMovieList" resultType="moviehistorydto" parameterType="hashmap">
+select movie_info.movie_title, movie_info.movie_img_src, ticketing.ticketing_num, ticketing.sch_time
 from  ticketing
-	join moive_info
+	join movie_info
 	on ticketing.movie_cd = movie_info.movie_cd
 where ticketing.user_key= #{user_key}
-order by sch_time desc limit
-<foreach collection="array" item="num" separator=",">#{num}</foreach>
+order by sch_time desc limit #{start},#{end}
+
 </select>
+
 <!--  내가 본 영화 수 -->
 <select id="getTotalMovieBoard" resultType="int">
 select count(*) from ticketing
-	join moive_info
+	join movie_info
 	on ticketing.movie_cd = movie_info.movie_cd
 where ticketing.user_key= #{user_key}
 </select>
 
 	<!--  내가 쓴 리뷰 게시글 다가져오기 -->
-	
+<select id="pagingReviewBoardList" resultType="reviewhistorydto" parameterType="hashmap">
+select movie_info.movie_title, movie_info.movie_img_src, review_board.board_title, review_board.board_write_date
+from  review_board
+	join movie_info
+	on review_board.movie_cd = movie_info.movie_cd
+where review_board.user_key= #{user_key}
+order by board_write_date desc limit #{start},#{end}
+
+</select>	
 	<!--  내가 쓴 리뷰 수 -->
-	
+<select id="getTotalReviewBoard" resultType="int">
+select count(*) from review_board
+	join movie_info
+	on review_board.movie_cd = movie_info.movie_cd
+where review_board.user_key= #{user_key}
+</select>	
 </mapper>

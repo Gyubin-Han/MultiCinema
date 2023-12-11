@@ -17,6 +17,8 @@ CREATE TABLE `user_info` (
 	`user_name`	varchar(20)	NOT NULL	COMMENT '유저이름'
 );
 
+show tables;
+select * from user_info;
 ALTER TABLE `user_info` ADD CONSTRAINT `PK_USER_INFO` PRIMARY KEY (
 	`user_key`
 );
@@ -64,6 +66,11 @@ CREATE TABLE `movie_info` (
 	`movie_director`	varchar(50)	NOT NULL	COMMENT '감독',
 	`movie_limitAge`	int	NOT NULL	COMMENT '관람 제한 연령'
 );
+insert into movie_info value(1,"1","1","1",now(),"1","1","1","1","1",12);
+insert into movie_info value(2,"2","2","2",now(),"2","2","2","2","2",15);
+insert into movie_info value(3,"3","3","3",now(),"3","3","3","3","3",18);
+
+select * from movie_info;
 
 ALTER TABLE `movie_info` ADD CONSTRAINT `PK_MOVIE_INFO` PRIMARY KEY (
 	`movie_cd`
@@ -141,6 +148,7 @@ CREATE TABLE `ticketing` (
 );
 
 
+select * from ticketing;
 ALTER TABLE `ticketing` ADD CONSTRAINT `PK_TICKETING` PRIMARY KEY (
 	`ticketing_num`,
 	`user_key`,

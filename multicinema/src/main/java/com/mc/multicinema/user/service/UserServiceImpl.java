@@ -14,6 +14,7 @@ import com.mc.multicinema.reviewboard.dto.ReviewBoardDTO;
 import com.mc.multicinema.reviewhistory.ReviewHistoryDTO;
 
 import java.util.HashMap;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +35,6 @@ public class UserServiceImpl implements UserService{
 		System.out.println("=====================ser"+user_id + user_pw+"=====================");
 	
 		return userdao.loginProcess(user_id, user_pw);
-		
-		 
 	}
 
 	@Override
@@ -50,15 +49,21 @@ public class UserServiceImpl implements UserService{
 		return userdao.memberJoinProcess(dto);
 	}
 	
+	@Override
+	public List<UserDTO> selectUserAll() {
+		return userdao.selectList();
+	}
 
 	@Override
 	// 로그인 된 사용자가 비밀번호를 한번 더 입력했을때 맞나 확인
-	public boolean authentication(String pw, HttpSession session) {
+	public boolean authentication(String user_pw, HttpSession session) {
 		
-		UserDTO loginUser = (UserDTO) session.getAttribute("login_user_key");
+		String loginUserKey =(String) session.getAttribute("login_user_key");
+		UserDTO loginUser = userdao.getUserByUserKey(loginUserKey);
 		String userPw = userdao.getPassword(loginUser);
-		
-		if (pw == userPw) {
+		System.out.println(user_pw);
+		System.out.println(userPw);
+		if (user_pw.equals(userPw)) {
 			return true;
 		}
 		else {
@@ -84,8 +89,8 @@ public class UserServiceImpl implements UserService{
 	
 	// 시청한 movieHistory DTO 객체 가져오기
 	@Override
-	public List<MovieHistoryDTO> movieList(int[] limit) {
-		return userdao.getMovieList(limit);
+	public List<MovieHistoryDTO> movieList(String login_user_key, int[] limit) {
+		return userdao.getMovieList(login_user_key,limit);
 		
 	}
 	// 시청한 전체 영화 수
@@ -97,16 +102,19 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public List<ReviewHistoryDTO> reviewBoardList(int[] limit) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ReviewHistoryDTO> reviewBoardList(String login_user_key,int[] limit) {
+		return userdao.getReviewBoardList(login_user_key,limit);
 	}
 
 	@Override
 	public int getTotalReviewBoard() {
-		// TODO Auto-generated method stub
-		return 0;
+		return userdao.getTotalReviewBoard();
 	}
 
+
+	public UserDTO selectUserOne(int user_key) {
+		return userdao.selectUserOne(user_key);
+	}
+	
 
 }

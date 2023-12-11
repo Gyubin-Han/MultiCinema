@@ -14,4 +14,10 @@
 	<select id="countAllReview" resultType="int">
 	select count(*) from review_board where is_deleted = false
 	</select>
+	
+	<select id="selectOneReviewBoard" resultType="reviewboarddto" parameterType="int">
+	select * from review_board where board_num = ${board_num}
+	</select>
+	
+	
 </mapper>

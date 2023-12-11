@@ -42,7 +42,7 @@
 
 <div id = "myPage_main" > 
 회원 정보 변경이 완료 되었습니다 <br>
-<a href="mainpage"> 홈으로 가기</a>
+<a href="/multicinema/"> 홈으로 가기</a>
 </div>
 
 

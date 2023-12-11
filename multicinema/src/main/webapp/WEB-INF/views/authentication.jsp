@@ -1,5 +1,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,10 +51,10 @@
 		</div>
 			
 			<form action="/multicinema/mypage/authenticationresult" method ="post">
-				비밀번호 <input id="user_pw" type="password" placeholder="비밀번호를 입력해주세요"><br>
-			<input type = submit  value = "입력">
+				비밀번호 <input id="user_pw" type="password" name="user_pw"  placeholder="비밀번호를 입력해주세요"><br>
+			<input type = submit  value = "입력" id="authentication_submit">
 			</form>
-				
+
 	</div>
 				
 			

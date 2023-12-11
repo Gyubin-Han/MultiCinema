@@ -31,6 +31,7 @@ import{movie_list,user_list,history_list,review_history_list,User,Movie,Movie_wa
 		window.location.href="/multicinema/mypage/reviewboardhistory";
 	}
 	
+
 	
 });
 

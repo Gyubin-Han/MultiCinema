@@ -36,33 +36,23 @@ public interface UserService {
 	UserDTO getUserByUserKey(String login_user_key);
 	
 	// 본인이 본 영화 목록 가져오기
-	List<MovieHistoryDTO> movieList(int[] limit);
+	List<MovieHistoryDTO> movieList(String login_user_key, int[] limit);
 	
 	// 전체 시청한 영화 개수 가져오기
 	int getTotalMovieBoard();
 	
 	// 본인이 남긴 리뷰 목록 불러오기
-	List<ReviewHistoryDTO> reviewBoardList(int[] limit);
+	List<ReviewHistoryDTO> reviewBoardList(String login_user_key, int[] limit);
 	
 	// 전체 남긴 리뷰 개수 가져오기
 	int getTotalReviewBoard();
 
-}
-
-
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	List<UserDTO> selectUserAll();
 		
-=======
+	UserDTO selectUserOne(int user_key);
 
->>>>>>> 7d77d6fa5ee4f8f208705b2d7d277e4eb8b9d420
+
+
+
+
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="reply">
+
+	<select id="selectReplyOne" parameterType="int">
+	select * from review_reply where reply_num = {reply_num} and is_deleted = false
+	</select>
+	
+	<select id="selectReplyList" parameterType="HashMap" resultType="reviewreplydto">
+	select * from review_reply where ${search} = #{keyword} and is_deleted = false
+	</select>
+	
+	<select id="selectReplyLikeList" parameterType="HashMap" resultType="replylikedto">
+	select *, 
+	(select count(*) from user_like_reply where reply_num = r.reply_num and user_key = #{user_key}) as user_like,
+	(select count(*) from user_dislike_reply where reply_num = r.reply_num and user_key = #{user_key}) as user_dislike
+	from review_reply r where reply_num = #{reply_num};
+	</select>
+	
+	
+</mapper>

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,12 +43,12 @@
 
 <div id = "myPage_main" >
 <table border="3">
-<tr><th>번호</th><th>제목</th><th>작성자</th><th>조회수}</th></tr>
+<tr><th>영화 이미지</th><th>영화 이름</th><th>제목</th><th>작성일자</th></tr>
 <c:forEach items="${boardlist }" var="dto">
-<tr><td>${dto.seq }</td><td><a href="boarddetail?seq=${dto.seq }">${dto.title }</a></td><td>${dto.writer }</td><td>${dto.viewcount }</td></tr>
+<tr><td>${dto.movie_img_src }</td><td>${dto.movie_title }</td><td>${dto.board_title }</td><td>${dto.board_write_date }</td></tr>
 </c:forEach>
 </table>
-<h1>페이지 번호를 선택하세요.</h1>
+<h4>페이지 번호를 선택하세요.</h4>
 <%
 int pagecount = (Integer)request.getAttribute("pagecount");
 int totalcount = (Integer)request.getAttribute("totalcount");
