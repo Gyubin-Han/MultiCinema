@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.mc.multicinema.user.dto.UserDTO;
 
 @Repository
-public class UserDao {
+public class UserDao_back {
 
 	@Autowired
 	SqlSession session;
