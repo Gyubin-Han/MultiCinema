@@ -13,7 +13,7 @@
 <title>MultiCinema</title>
 <script src="resources/js/jquery-3.7.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="resources/css/movie_detail.css">
-
+<%@ include file="/WEB-INF/views/header/mainheader.jsp" %>
 <script>
 $(document).ready(function(){
 	$("#write_btn").on('click', function(e){
