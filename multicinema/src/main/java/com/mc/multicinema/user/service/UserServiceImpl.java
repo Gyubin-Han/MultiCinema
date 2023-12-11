@@ -1,6 +1,5 @@
 package com.mc.multicinema.user.service;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +18,6 @@ public class UserServiceImpl implements UserService{
 		System.out.println("=====================ser"+user_id + user_pw+"=====================");
 	
 		return userdao.loginProcess(user_id, user_pw);
-		
-		 
 	}
 
 	@Override
@@ -35,5 +32,14 @@ public class UserServiceImpl implements UserService{
 		return userdao.memberJoinProcess(dto);
 	}
 	
+	@Override
+	public List<UserDTO> selectUserAll() {
+		return userdao.selectList();
+	}
 
+	@Override
+	public UserDTO selectUserOne(int user_key) {
+		return userdao.selectUserOne(user_key);
+	}
+	
 }

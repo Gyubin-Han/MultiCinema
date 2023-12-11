@@ -12,4 +12,7 @@ public interface UserService {
 
 	int memberJoinProcess(UserDTO dto);
 
+	List<UserDTO> selectUserAll();
+		
+	UserDTO selectUserOne(int user_key);
 }

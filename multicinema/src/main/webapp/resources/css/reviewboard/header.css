@@ -15,7 +15,7 @@
 	width: 280px;
 	text-align: center;
 	align-items: center;
-	background-image: url(resources/images/americano.jpg);
+	background-image: url('resources/images/americano.jpg');
 	background-repeat: no-repeat;
 	text-indent: -999999px;
 }

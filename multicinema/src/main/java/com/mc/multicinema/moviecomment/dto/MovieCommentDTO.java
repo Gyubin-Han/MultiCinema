@@ -1,5 +1,8 @@
 package com.mc.multicinema.moviecomment.dto;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class MovieCommentDTO {
 	
 	int comment_num;

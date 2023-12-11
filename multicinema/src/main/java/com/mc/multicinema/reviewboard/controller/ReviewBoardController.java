@@ -8,9 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.mc.multicinema.reviewboard.dto.ReviewBoardDTO;
 import com.mc.multicinema.reviewboard.service.ReviewBoardService;
+import com.mc.multicinema.user.service.UserService;
 
 /**
  * 2023-12-07 ~ ing JIN616
@@ -21,11 +23,41 @@ public class ReviewBoardController {
 
 	@Autowired
 	ReviewBoardService service;
-
+	@Autowired
+	UserService userService;
+	
 	@RequestMapping("/board")
 	public String reviewBoardHome() {
 		return "reviewboard/reviewboard";
 	}
+	
+	@RequestMapping("/reviewdetail")
+	@ResponseBody
+	public ModelAndView selectReviewDetail(
+			@RequestParam(value="board_num", defaultValue="-1") int board_num) {
+		ModelAndView mv = new ModelAndView();
+		
+		if(board_num == -1) {
+			System.out.println("check");
+			mv.setViewName("redirect:board");
+		}
+		
+		ReviewBoardDTO dto = service.selectReviewBoard(board_num);
+		if(dto == null) {
+			mv.addObject("errormsg", "올바른 게시물 번호를 입력하세요.");
+			mv.setViewName("redirect:board");
+		} else if(dto.isIs_deleted()) {
+			mv.addObject("errormsg", "삭제된 게시물입니다.");
+			mv.setViewName("redirect:board");
+		} else {
+			mv.addObject("review", dto);
+			mv.addObject("user", userService.selectUserOne(dto.getUser_key()));
+			mv.setViewName("reviewdetail");
+		}
+		return mv;
+	}
+	
+	
 	
 	@RequestMapping("/countallreview")
 	@ResponseBody

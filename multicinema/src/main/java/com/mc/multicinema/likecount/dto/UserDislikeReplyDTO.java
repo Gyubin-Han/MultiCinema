@@ -1,5 +1,8 @@
 package com.mc.multicinema.likecount.dto;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class UserDislikeReplyDTO {
 	
 	int user_key;

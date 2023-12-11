@@ -17,12 +17,17 @@ public class ReviewBoardDAO {
 	
 	public List<ReviewBoardDTO> selectReviewBoard(ArrayList<Integer> paging) {
 		System.out.println("DAO : selectReviewBoard called");
-		return session.selectList("selectReviewBoard", paging);
+		return session.selectList("reviewboard.selectReviewBoard", paging);
 	}
 
 	public int countAllReview() {
 		System.out.println("DAO : countAllReview called");
-		return session.selectOne("countAllReview");
+		return session.selectOne("reviewboard.countAllReview");
+	}
+
+	public ReviewBoardDTO selectReviewBoard(int board_num) {
+		System.out.println("DAO : selectReviewBoard called");
+		return session.selectOne("reviewboard.selectOneReviewBoard", board_num);
 	}
 
 }

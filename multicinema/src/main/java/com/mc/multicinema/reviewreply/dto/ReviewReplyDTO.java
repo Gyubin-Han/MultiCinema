@@ -1,6 +1,10 @@
 package com.mc.multicinema.reviewreply.dto;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ReviewReplyDTO {
+	
 	int reply_num;
 	int board_num;
 	int user_key;

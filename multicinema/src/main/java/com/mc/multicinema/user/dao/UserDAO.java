@@ -17,7 +17,7 @@ public class UserDAO {
 	
 	public UserDTO loginProcess(String user_id, String user_pw) {
 		
-		HashMap<String, String> map = new HashMap<>();
+		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("user_id", user_id);
 		map.put("user_pw", user_pw);
 		System.out.println("=========="+user_id+"/"+user_pw+"/"+map.get("user_id")+"/"+map.get("user_pw")+"==========");
@@ -26,7 +26,7 @@ public class UserDAO {
 	}
 
 	public List<UserDTO> memberCheckProcess(String user_id, String user_email) {
-		HashMap<String, String> map = new HashMap<>();
+		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("user_id", user_id);
 		map.put("user_email", user_email);
 		
@@ -38,4 +38,11 @@ public class UserDAO {
 		return session.insert("memberInsert", dto);
 	}
 
+	public List<UserDTO> selectList() {
+		return session.selectList("user.selectUserAll");
+	}
+
+	public UserDTO selectUserOne(int user_key) {
+		return session.selectOne("user.selectUserOne", user_key);
+	}
 }

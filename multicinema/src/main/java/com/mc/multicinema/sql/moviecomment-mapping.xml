@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="moviecomment">
+
+	<select id="selectMovieCommentAll" resultType="moviecommentdto">
+	select * from movie_comment
+	</select>
+	
+	<select id="selectMovieCommentAllBySearching" parameterType="HashMap" resultType="moviecommentdto">
+	select * from movie_comment where ${search} like concat('%',#{keyword},'%')
+	</select>
+	
+	<select id="selectMovieCommentCheck" parameterType="HashMap" resultType="int">
+	select count(*) from movie_comment where user_key = ${user_key} and movie_cd = ${movie_cd}
+	</select>
+	
+	<insert id="insertMovieComment" parameterType="moviecommentdto">
+	insert into movie_comment values(
+		default, <!-- comment_num auto_increment -->
+		#{user_key}, <!-- user_key -->
+		#{movie_cd}, <!-- movie_cd -->
+		now(), <!-- comment_write_date -->
+		${comment_content}, <!-- comment_content -->
+		default, <!-- is_deleted false -->
+		null, <!-- deleted_date -->
+		default, <!-- comment_like 0 -->
+		#{comment_score} <!-- comment_score -->
+		) 
+	
+	</insert>
+</mapper>
