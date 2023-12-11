@@ -25,13 +25,6 @@ ALTER TABLE `user_info` ADD CONSTRAINT `PK_USER_INFO` PRIMARY KEY (
 alter table user_info modify user_key int auto_increment;
 alter table user_info add UNIQUE (user_id);
 
-show columns from user_info;
-insert into user_info value(null,'가','asdsa','asdsa',now(),now(),'41',false,now(),'asda');
-insert into user_info value(null,'가','asdsa','asdsa',now(),now(),'41',false,now(),'asda');
-insert into user_info value(null,'가나','asdsa','asdsa',now(),now(),'41',false,now(),'asda');
-insert into user_info value(null,'가나다','asdsa','asdsa',now(),now(),'41',false,now(),'asda');
-select * from user_info;
-truncate table user_info;
 
 CREATE TABLE `cinema` (
 	`cinema_id`	int	NOT NULL,
@@ -142,11 +135,10 @@ CREATE TABLE `ticketing` (
 	`ticketing_num`	int	NOT NULL	COMMENT '예매번호',
 	`user_key`	int	NOT NULL	COMMENT '가입시 숫자로 부여',
 	`seat_id`	varchar(20)	NOT NULL	COMMENT '좌석 고유 id',
-	`sch_id`	varchar(20)	NOT NULL	COMMENT '상영 일정'
+	`sch_id`	varchar(20)	NOT NULL	COMMENT '상영 일정',
+    `movie_cd` int not null,
+    `sch_time` datetime NOT NULL
 );
-
-alter table `ticketing` add column `movie_cd` int not null;
-alter table `ticketing` add column `sch_time` datetime	NOT NULL;
 
 
 ALTER TABLE `ticketing` ADD CONSTRAINT `PK_TICKETING` PRIMARY KEY (

@@ -6,6 +6,7 @@
 
 	<typeAliases>
 		<typeAlias type="com.mc.multicinema.reviewboard.dto.ReviewBoardDTO" alias="reviewboarddto"/>
+
 	</typeAliases>
 	
 </configuration>

@@ -42,9 +42,9 @@
 
 <div id = "myPage_main" >
 <table border="3">
-<tr><th>번호</th><th>제목</th><th>작성자</th><th>조회수}</th></tr>
+<tr><th>예매번호</th><th>영화이미지</th><th>영화제목</th><th>상영일자</th></tr>
 <c:forEach items="${boardlist }" var="dto">
-<tr><td>${dto.seq }</td><td><a href="boarddetail?seq=${dto.seq }">${dto.title }</a></td><td>${dto.writer }</td><td>${dto.viewcount }</td></tr>
+<tr><td>${dto.ticketing_num }</td><td><img src=movie_img_url></td><td>${dto.movie_title }</td><td>${dto.sch_time }</td></tr>
 </c:forEach>
 </table>
 <h1>페이지 번호를 선택하세요.</h1>
@@ -57,7 +57,7 @@ else totalpage = totalcount / pagecount + 1;
 
 for(int i = 1; i <=totalpage; i++){
 %>	
-<a href="boardlist?pagenum=<%=i%>"> <%=i%>페이지 </a> 
+<a href="/mypage/reservedetail?pagenum=<%=i%>"> <%=i%>페이지 </a> 
 <%
 }
 %>

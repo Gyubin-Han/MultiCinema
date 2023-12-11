@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mc.multicinema.moviehistory.MovieHistoryDTO;
 import com.mc.multicinema.movieinfo.dto.MovieDTO;
+import com.mc.multicinema.reviewhistory.ReviewHistoryDTO;
 import com.mc.multicinema.user.dto.UserDTO;
 import com.mc.multicinema.user.service.UserService;
 
@@ -29,24 +31,7 @@ public class UserController {
 		return mv;
 	}
 	
-	// 예매 내역 
-	@RequestMapping("/mypage/reservedetail")
-	ModelAndView reserveMovielist(@RequestParam(value="pagenum", required=false , defaultValue="1") int pagenum) {
-		int pagecount = 5;
-		int [] limit = new int[2];
-		limit[0] = (pagenum-1) * pagecount;
-		limit[1] = pagecount;
-		ModelAndView mv = new ModelAndView();
-		
-		List<MovieDTO> list = service.movieList(limit);
-		mv.addObject("boardlist", list);
-		int totalcount = service.getTotalMovieBoard();
-		mv.addObject("totalcount", totalcount);
-		
-		mv.addObject("pagecount", pagecount);
-		mv.setViewName("reservedetail");
-		return mv;
-	}
+
 	
 	// 회원 정보 수정
 	@RequestMapping("/mypage/authentication")
@@ -127,12 +112,42 @@ public class UserController {
 			return "infochangefinish";
 		}
 	}
+	// 예매 내역 
+	@RequestMapping("/mypage/reservedetail")
+	ModelAndView reserveMovielist(@RequestParam(value="pagenum", required=false , defaultValue="1") int pagenum) {
+		int pagecount = 5;
+		int [] limit = new int[2];
+		limit[0] = (pagenum-1) * pagecount;
+		limit[1] = pagecount;
+		ModelAndView mv = new ModelAndView();
+		
+		List<MovieHistoryDTO> list = service.movieList(limit);
+		mv.addObject("boardlist", list);
+		int totalcount = service.getTotalMovieBoard();
+		mv.addObject("totalcount", totalcount);
+		
+		mv.addObject("pagecount", pagecount);
+		mv.setViewName("reservedetail");
+		return mv;
+	}
 	
 	// 작성 리뷰 게시글 
 	@RequestMapping("/mypage/reviewboardhistory")
-	ModelAndView reviewBoardHistory() {
+	ModelAndView reviewBoardHistory(@RequestParam(value="pagenum", required=false , defaultValue="1") int pagenum) {
+		int pagecount = 5;
+		int [] limit = new int[2];
+		limit[0] = (pagenum-1) * pagecount;
+		limit[1] = pagecount;
 		ModelAndView mv = new ModelAndView();
+		
+		List<ReviewHistoryDTO> list = service.reviewBoardList(limit);
+		mv.addObject("boardlist", list);
+		int totalcount = service.getTotalReviewBoard();
+		mv.addObject("totalcount", totalcount);
+		
+		mv.addObject("pagecount", pagecount);
 		mv.setViewName("reviewboardhistory");
+		
 		return mv;
 	}
 	

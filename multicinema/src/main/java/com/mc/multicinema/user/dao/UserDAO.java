@@ -2,15 +2,19 @@ package com.mc.multicinema.user.dao;
 
 import java.util.HashMap;
 import java.util.List;
+
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.mc.multicinema.moviehistory.MovieHistoryDTO;
 import com.mc.multicinema.movieinfo.dto.MovieDTO;
+
 import com.mc.multicinema.user.dto.UserDTO;
 
 @Repository
@@ -41,6 +45,7 @@ public class UserDAO {
 		
 		return session.insert("memberInsert", dto);
 	}
+
 	
 	// user가 본 영화 객체들 받기
 	List<MovieDTO> loadMovieHistory() {
@@ -82,9 +87,16 @@ public class UserDAO {
 		UserDTO dto = session.selectOne("getUserByUserKey", login_user_key);
 		return dto;
 	}
-
-	public List<MovieDTO> getMovieList(int[] limit) {
+	
+	// 시청한 moviehistory DTO 가져오기
+	public List<MovieHistoryDTO> getMovieList(int[] limit) {
 		return session.selectList("pagingMovieList", limit);
+	}
+	
+	// 총 시청한 영화 수 가져오기
+	public int getTotalMovieBoard() {
+		return session.selectOne("getTotalMovieBoard");
+		
 	}
 
 
