@@ -21,8 +21,7 @@ public class UserDAO {
 		map.put("user_id", user_id);
 		map.put("user_pw", user_pw);
 		System.out.println("=========="+user_id+"/"+user_pw+"/"+map.get("user_id")+"/"+map.get("user_pw")+"==========");
-		return session.selectOne("login", map);
-		
+		return session.selectOne("user.login", map);
 	}
 
 	public List<UserDTO> memberCheckProcess(String user_id, String user_email) {
@@ -30,7 +29,7 @@ public class UserDAO {
 		map.put("user_id", user_id);
 		map.put("user_email", user_email);
 		
-		return session.selectList("selectMemberCheck", map);
+		return session.selectList("user.selectMemberCheck", map);
 	}
 
 	public int memberJoinProcess(UserDTO dto) {

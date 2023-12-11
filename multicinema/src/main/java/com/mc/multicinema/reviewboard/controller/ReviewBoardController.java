@@ -52,7 +52,7 @@ public class ReviewBoardController {
 		} else {
 			mv.addObject("review", dto);
 			mv.addObject("user", userService.selectUserOne(dto.getUser_key()));
-			mv.setViewName("reviewdetail");
+			mv.setViewName("reviewboard/reviewdetail");
 		}
 		return mv;
 	}

@@ -37,25 +37,7 @@
 </head>
 <body>
 <!-- 공통 UI 삽입 부분 -->
-<header class="body">
-	<div class="header">
-		<h1 class="mainlogo">
-			<a href="mainpage.html" title="홈화면으로 가기">홈으로가기</a>
-		</h1>
-		<div class="myinformation">
-			<a href="main_signout.html">로그아웃하기</a>
-			<a href="mypage.html">내정보확인</a>
-		</div>
-	</div>
-		
-	<hr>
-		<ul id="mainNavigator">
-			<li id="movie"><a href="movie.html">영화</a></li>
-			<li id="ticketing"><a href="timetable_select.html">예매</a></li>
-			<li id="theater"><a href="theater.html">영화관</a></li>
-		</ul>
-	<hr>
-</header>
+<%@ include file="/WEB-INF/views/header/mainheader.jsp" %>
 
 <!-- 기능별 구현 부분 -->
 <div id="result_title">

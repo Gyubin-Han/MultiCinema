@@ -19,5 +19,8 @@
 	select * from review_board where board_num = ${board_num}
 	</select>
 	
+	<update id="updateViewCount" parameterType="int">
+	update review_board set board_view_count = board_view_count + 1  where board_num = #{board_num}
+	</update>
 	
 </mapper>

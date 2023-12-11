@@ -5,12 +5,22 @@
 <mapper namespace="user">
 
 	<select id="selectUserAll" resultType="userdto">
-	select * from user where is_deleted = false
+	select * from user_info where is_deleted = false
 	</select>
 	
-	<select id="selectUserOne" resultType="int">
-	select * from user where user_key = ${user_key}
+	<select id="selectUserOne" resultType="userdto">
+	select * from user_info where user_key = ${user_key}
 	</select>
 	
+	<select id="login" parameterType="hashmap" resultType="userdto">
+	select * from user_info where user_id = #{user_id} and user_pw = #{user_pw}
+	</select>
 	
+	<select id="selectMemberCheck" parameterType="hashmap" resultType="userdto">
+	select * from user_info where user_id = #{user_id} or user_email = #{user_email}
+	</select>
+
+	<insert id="memberInsert" parameterType="userdto">
+	insert into user_info(user_id, user_email, user_pw, user_regdate, user_birthday, user_pw_salt, user_name) values(#{user_id}, #{user_email}, #{user_pw}, now(), #{user_birthday}, 'a', #{user_name})
+	</insert>
 </mapper>

@@ -9,7 +9,8 @@ import com.mc.multicinema.user.dao.UserDAO;
 import com.mc.multicinema.user.dto.UserDTO;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
+	
 	@Autowired
 	UserDAO userdao;
 	

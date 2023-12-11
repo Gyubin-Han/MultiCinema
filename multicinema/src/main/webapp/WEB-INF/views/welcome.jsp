@@ -8,25 +8,6 @@
 <title>환영합니다</title>
 <link rel="stylesheet" type="text/css" href="resources/css/index.css">
 </head>
-<header class="body">
-	<div class="header">
-		<h1 class="mainlogo">
-			<a href="main_signout.html" title="홈화면으로 가기">홈으로가기</a>
-		</h1>
-		<div class="myinformation">
-			<a href="main_signin.html">로그인하기</a>
-			<a href="signin.html">회원가입</a>
-		</div>
-	</div>
-		
-	<hr>
-	<ul id="mainNavigator">
-		<li id="movie"><a href="movie.html">영화</a></li>
-		<li id="ticketing"><a href="tiketing.html">예매</a></li>
-		<li id="theater"><a href="theater.html">영화관</a></li>
-	</ul>
-	<hr>
-</header>
 <style>
 	#welcome_phrase{
 		text-align: center;
@@ -57,6 +38,7 @@
 	
 </script>
 <body>
+<%@ include file="/WEB-INF/views/header/mainheader.jsp" %>
 	<h1 id="welcome_phrase"></h1>
 	<a id = "main_page_btn" href="/multicinema/login">로그인 하기</a>
 </body>
