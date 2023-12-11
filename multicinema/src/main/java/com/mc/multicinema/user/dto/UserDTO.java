@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserDTO {
 	
+	String user_id;
 	String user_key;
 	String user_email;
 	String user_pw;
@@ -16,6 +17,12 @@ public class UserDTO {
 	String user_name;
 	
 	
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
 	public String getUser_key() {
 		return user_key;
 	}
