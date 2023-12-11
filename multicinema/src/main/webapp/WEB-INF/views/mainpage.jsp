@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>최고의 영화관. MultiCinema</title>
-<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="/multicinema/resources/css/index.css">
 </head>
 <header class="body">
 	<div class="header">
@@ -15,6 +15,7 @@
 		<div class="myinformation">
 			<a href="login.html">로그인하기</a>
 			<a href="join_confirm.html">회원가입</a>
+			<a href="mypage">마이페이지</a>
 		</div>
 	</div>
 		

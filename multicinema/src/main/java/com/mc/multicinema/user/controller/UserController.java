@@ -2,10 +2,25 @@ package com.mc.multicinema.user.controller;
 
 import java.util.List;
 
+import java.util.regex.Pattern;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.mc.multicinema.moviehistory.MovieHistoryDTO;
+import com.mc.multicinema.movieinfo.dto.MovieDTO;
+import com.mc.multicinema.reviewhistory.ReviewHistoryDTO;
+import com.mc.multicinema.user.dto.UserDTO;
+import com.mc.multicinema.user.service.UserService;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,12 +36,20 @@ import com.mc.multicinema.user.service.UserService;
  * 회원 키 가지고 유저 닉네임 가져오는 sql 작성 
  *
  */
+
 @Controller
 public class UserController {
 	
 	@Autowired
 	UserService service;
 	
+
+	@RequestMapping("/mypage")
+	ModelAndView mypage(HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("mypage");
+		return mv;
+	}
 	List<UserDTO> selectUserAll() {
 		return service.selectUserAll();
 	}
@@ -86,9 +109,135 @@ public class UserController {
 			m.addAttribute("result", "이미 존재하는 회원입니다");
 			return "member_check";
 		}
+
 	}
 	
 
+	
+
+	// 회원 정보 수정
+	@RequestMapping("/mypage/authentication")
+	ModelAndView authentication(HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("authentication");
+		return mv;
+	}
+	
+	@PostMapping("/mypage/authenticationresult")
+	ModelAndView authenticationResult(String user_pw, HttpSession session,HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		
+		if(service.authentication(user_pw, session) == true) {
+			mv.addObject("authenticationStatus","1");
+			mv.setViewName("changeuserinfo");
+			
+			return mv;
+		}
+		else	{
+			mv.addObject("authenticationStatus","2");
+			mv.setViewName("authentication");
+			
+			return mv;
+		}
+	}
+	
+	
+
+	
+	@RequestMapping("/mypage/changeuserinfo")
+	ModelAndView changeUserInfo() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("changeuserinfo");
+		return mv;
+	}
+	
+	@RequestMapping("/mypage/changeemail")
+	ModelAndView changeemail() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("changeemail");
+		return mv;
+	}
+	
+	@PostMapping("/mypage/changeemailresult")
+	String changeEmailResult(String user_email, String user_email_again, HttpSession session) {
+		
+		String email_pattern = "^[A-Za-z0-9]{4,12}@[A-Za-z0-9]{1,}.(co.kr|com|net)$";
+		// 이메일 형식이 안맞는 경우
+		if(!Pattern.matches(email_pattern,user_email)) {
+			return "changeemail";
+		}
+		// 두 입력값이 다른 경우
+		else if(!user_email.equals(user_email_again)) {
+			return "changeemail";
+		}
+		// 정상적인 경우
+		else {
+			String login_user_key = (String)session.getAttribute("login_user_key");
+			UserDTO login_user = service.getUserByUserKey(login_user_key);
+			service.changeUserEmail(login_user, user_email);
+			return "infochangefinish";
+		}
+	}
+	
+	@RequestMapping("/mypage/changepw")
+	ModelAndView changepw(HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("changepw");
+		return mv;
+	}
+	
+	@PostMapping("/mypage/changepwresult")
+	String changePwResult(String user_pw, String user_pw_again, HttpSession session) {
+		
+		// 두 입력값이 다른 경우
+		if(!user_pw.equals(user_pw_again) || user_pw.equals(null) ) {
+			return "changepw";
+		}
+		// 정상적인 경우
+		else {
+			String login_user_key = (String)session.getAttribute("login_user_key");
+			UserDTO login_user = service.getUserByUserKey(login_user_key);
+			service.changeUserPw(login_user, user_pw);
+			return "infochangefinish";
+		}
+	}
+	// 예매 내역 
+	@RequestMapping("/mypage/reservedetail")
+	ModelAndView reserveMovielist(@RequestParam(value="pagenum", required=false , defaultValue="1") int pagenum,HttpSession session ) {
+		int pagecount = 5;
+		int [] limit = new int[2];
+		limit[0] = (pagenum-1) * pagecount;
+		limit[1] = pagecount;
+		ModelAndView mv = new ModelAndView();
+		String login_user_key = (String)session.getAttribute("login_user_key");
+		List<MovieHistoryDTO> list = service.movieList(login_user_key,limit);
+		mv.addObject("boardlist", list);
+		int totalcount = service.getTotalMovieBoard();
+		mv.addObject("totalcount", totalcount);
+		
+		mv.addObject("pagecount", pagecount);
+		mv.setViewName("reservedetail");
+		return mv;
+	}
+	
+	// 작성 리뷰 게시글 
+	@RequestMapping("/mypage/reviewboardhistory")
+	ModelAndView reviewBoardHistory(@RequestParam(value="pagenum", required=false , defaultValue="1") int pagenum,HttpSession session) {
+		int pagecount = 5;
+		int [] limit = new int[2];
+		limit[0] = (pagenum-1) * pagecount;
+		limit[1] = pagecount;
+		ModelAndView mv = new ModelAndView();
+		String login_user_key = (String)session.getAttribute("login_user_key");
+		List<ReviewHistoryDTO> list = service.reviewBoardList(login_user_key,limit);
+		mv.addObject("boardlist", list);
+		int totalcount = service.getTotalReviewBoard();
+		mv.addObject("totalcount", totalcount);
+		
+		mv.addObject("pagecount", pagecount);
+		mv.setViewName("reviewboardhistory");
+		return mv;
+	}
 	
 	@PostMapping("/memberjoin")
 	public ModelAndView memberjoin(String user_id, String user_email) {
@@ -98,10 +247,12 @@ public class UserController {
 		mv.addObject("user_id", user_id);
 		mv.addObject("user_email", user_email);
 		mv.setViewName("member_join");
+
 		
 		return mv;
 	}
 	
+
 	@PostMapping("/welcome")
 	public String welcome(UserDTO dto, Model m) {
 		int res = service.memberJoinProcess(dto);
@@ -115,5 +266,6 @@ public class UserController {
 		
 		
 	}
+
 	
 }

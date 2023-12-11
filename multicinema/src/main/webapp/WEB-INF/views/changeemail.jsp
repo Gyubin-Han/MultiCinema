@@ -1,7 +1,4 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,27 +41,14 @@
 </div>
 
 <div id = "myPage_main" >
-	<div id="container">
-	<div id="contents">
-		<div id="contents_header">
-		본인 확인을 위해 다시한번 비밀번호를 입력해주세요
-		</div>
-			
-			<form action="/multicinema/mypage/authenticationresult" method ="post">
-				비밀번호 <input id="user_pw" type="password" name="user_pw"  placeholder="비밀번호를 입력해주세요"><br>
-			<input type = submit  value = "입력" id="authentication_submit">
-			</form>
+<form action= "changeemailresult" method="post">
+	변경할 이메일 <input type="email" name = "user_email"> <br>
+	다시 한번 입력해 주세요 <input type="email" name = "user_email_again"> <br>
+	<input type = submit value ="이메일 변경">
+</form>
 
-	</div>
-				
-			
-	</div>
+
 </div>
-	
-
-
-
-
 
 
 </body>

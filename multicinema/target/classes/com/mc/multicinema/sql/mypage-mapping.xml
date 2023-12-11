@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mypage">
+	
+	<!-- 바꾼 비밀번호로 바꾸기 -->
+<update id="changePw"  parameterType ="hashMap">
+update user_info set user_pw=#{user_pw} where user_key=#{user_key} 
+</update>
+	<!--  바꾼 이메일로 바꾸기 -->
+<update id="changeEmail"  parameterType ="hashMap">
+update user_info set user_email=#{user_email} where user_key=#{user_key}
+</update>	
+<!--  입력된 user key로 UserDTO 가져오기 -->
+<select id = "getUserByUserKey" resultType = "userdto" parameterType ="String">
+select * from user_info where user_key=#{user_key}
+</select>
+	<!-- 현재 로그인된 id의 비밀번호 가져오기 -->
+<select id ="getPassword" resultType ="string" parameterType="userdto">
+select user_pw from user_info where user_id = #{user_id}
+</select>
+	<!--  내가 본 무비 객체 다가져오기 -->
+
+<select id="pagingMovieList" resultType="moviehistorydto" parameterType="hashmap">
+select movie_info.movie_title, movie_info.movie_img_src, ticketing.ticketing_num, ticketing.sch_time
+from  ticketing
+	join movie_info
+	on ticketing.movie_cd = movie_info.movie_cd
+where ticketing.user_key= #{user_key}
+order by sch_time desc limit #{start},#{end}
+
+</select>
+
+<!--  내가 본 영화 수 -->
+<select id="getTotalMovieBoard" resultType="int">
+select count(*) from ticketing
+	join movie_info
+	on ticketing.movie_cd = movie_info.movie_cd
+where ticketing.user_key= #{user_key}
+</select>
+
+	<!--  내가 쓴 리뷰 게시글 다가져오기 -->
+<select id="pagingReviewBoardList" resultType="reviewhistorydto" parameterType="hashmap">
+select movie_info.movie_title, movie_info.movie_img_src, review_board.board_title, review_board.board_write_date
+from  review_board
+	join movie_info
+	on review_board.movie_cd = movie_info.movie_cd
+where review_board.user_key= #{user_key}
+order by board_write_date desc limit #{start},#{end}
+
+</select>	
+	<!--  내가 쓴 리뷰 수 -->
+<select id="getTotalReviewBoard" resultType="int">
+select count(*) from review_board
+	join movie_info
+	on review_board.movie_cd = movie_info.movie_cd
+where review_board.user_key= #{user_key}
+</select>	
+</mapper>
