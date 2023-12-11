@@ -8,6 +8,8 @@
 <link rel="stylesheet" type="text/css" href="css/index.css">
 <script src="resources/js/jquery-3.7.1.min.js"></script>
 </head>
+<link rel="stylesheet" type="text/css" href="/multicinema/resources/css/index.css">
+</head>
 <style>
 	html{
 		text-align:center;

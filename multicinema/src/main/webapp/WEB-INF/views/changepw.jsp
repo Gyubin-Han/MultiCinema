@@ -1,7 +1,4 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,28 +40,13 @@
 	<div id="my_review"> 작성 리뷰 게시글</div><hr >
 </div>
 
-<div id = "myPage_main" >
-	<div id="container">
-	<div id="contents">
-		<div id="contents_header">
-		본인 확인을 위해 다시한번 비밀번호를 입력해주세요
-		</div>
-			
-			<form action="/multicinema/mypage/authenticationresult" method ="post">
-				비밀번호 <input id="user_pw" type="password" name="user_pw"  placeholder="비밀번호를 입력해주세요"><br>
-			<input type = submit  value = "입력" id="authentication_submit">
-			</form>
-
-	</div>
-				
-			
-	</div>
+<div id = "myPage_main" >  
+<form action= "changepwresult" method="post">
+	변경할 비밀번호 <input type="password" name = "user_pw"> <br>
+	다시 한번 입력해주세요 <input type="password" name = "user_pw_again"> <br>
+	<input type = submit value ="비밀번호 변경">
+</form>
 </div>
-	
-
-
-
-
 
 
 </body>

@@ -1,7 +1,5 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,25 +42,27 @@
 </div>
 
 <div id = "myPage_main" >
-	<div id="container">
-	<div id="contents">
-		<div id="contents_header">
-		본인 확인을 위해 다시한번 비밀번호를 입력해주세요
-		</div>
-			
-			<form action="/multicinema/mypage/authenticationresult" method ="post">
-				비밀번호 <input id="user_pw" type="password" name="user_pw"  placeholder="비밀번호를 입력해주세요"><br>
-			<input type = submit  value = "입력" id="authentication_submit">
-			</form>
+<table border="3">
+<tr><th>영화 이미지</th><th>영화 이름</th><th>제목</th><th>작성일자</th></tr>
+<c:forEach items="${boardlist }" var="dto">
+<tr><td>${dto.movie_img_src }</td><td>${dto.movie_title }</td><td>${dto.board_title }</td><td>${dto.board_write_date }</td></tr>
+</c:forEach>
+</table>
+<h4>페이지 번호를 선택하세요.</h4>
+<%
+int pagecount = (Integer)request.getAttribute("pagecount");
+int totalcount = (Integer)request.getAttribute("totalcount");
+int totalpage = 0;
+if( totalcount % pagecount == 0)  totalpage = totalcount / pagecount;
+else totalpage = totalcount / pagecount + 1;
 
-	</div>
-				
-			
-	</div>
+for(int i = 1; i <=totalpage; i++){
+%>	
+<a href="/mypage/reviewboardhistory?pagenum=<%=i%>"> <%=i%>페이지 </a> 
+<%
+}
+%>
 </div>
-	
-
-
 
 
 

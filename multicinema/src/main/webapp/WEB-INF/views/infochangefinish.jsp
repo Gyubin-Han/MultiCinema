@@ -7,17 +7,31 @@
 
 <title>마이 페이지</title>
 
-<link rel="stylesheet" type="text/css" href="css/mypageCSS.css">
 
 <link rel="stylesheet" type="text/css" href="/multicinema/resources/css/index.css">
 <link rel="stylesheet" type="text/css" href="/multicinema/resources/css/mypageCSS.css">
-
 <style>
 
 </style>
 </head>
 <body >
-<%@ include file="/WEB-INF/views/header/mainheader.jsp" %>
+		<div class="header">
+		<h1 class="mainlogo">
+			<a href="mainpage.html" title="홈화면으로 가기">홈으로가기</a>
+		</h1>
+		<div class="myinformation">
+			<a href="main_signout.html">로그아웃하기</a>
+			<a href="mypage.html">내정보확인</a>
+		</div>
+	</div>
+		
+	<hr>
+		<ul id="mainNavigator">
+			<li id="movie"><a href="movie.jsp">영화</a></li>
+			<li id="ticketing"><a href="timetable_select.jsp">예매</a></li>
+			<li id="theater"><a href="theater.jsp">영화관</a></li>
+		</ul>
+	<hr>
 	
 	<script type = "module" src ="/multicinema/resources/script/mypage.js"></script>
 <div id = "myPage_navigater" >
@@ -26,8 +40,10 @@
 	<div id="my_review"> 작성 리뷰 게시글</div><hr >
 </div>
 
-<div id = "myPage_main" > </div>
-
+<div id = "myPage_main" > 
+회원 정보 변경이 완료 되었습니다 <br>
+<a href="/multicinema/"> 홈으로 가기</a>
+</div>
 
 
 
