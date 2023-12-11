@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="a">
+<insert id="insertOneMovie">
+insert into movie_info(movie_cd, movie_title, movie_img_src, movie_spec, movie_openDt,
+ movie_showTm, movie_makeNt, movie_genre, movie_director, movie_limitAge, movie_type) values(
+ #{movie_cd}, #{movie_title}, #{movie_img_src}, #{movie_spec}, #{movie_openDt}, #{movie_showTm}, #{movie_makeNt}
+ , #{movie_genre}, #{movie_director}, #{movie_limitAge}, #{movie_type})
+</insert>
+<select id="selectMovieImgSrc" parameterType="int" resultType="string">
+select movie_img_src from movie_info where movie_cd = #{movie_cd}
+</select>
+<select id="selectOneMovie" parameterType="int" resultType="moviedto">
+select * from movie_info where movie_cd = #{movie_cd}
+</select>
+<select id="selectAllmovie" resultType="moviedto">
+select * from movie_info
+</select>
+</mapper>

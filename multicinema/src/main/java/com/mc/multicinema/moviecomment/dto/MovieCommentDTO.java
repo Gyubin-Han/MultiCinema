@@ -7,6 +7,7 @@ public class MovieCommentDTO {
 	
 	int comment_num;
 	int user_key;
+	String user_id;
 	int movie_cd;
 	String comment_write_date;
 	String comment_content;
@@ -16,6 +17,12 @@ public class MovieCommentDTO {
 	int comment_score;
 	
 	
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
 	public int getComment_num() {
 		return comment_num;
 	}
