@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mypage">
+	
+	<!-- 바꾼 비밀번호로 바꾸기 -->
+<update id="changePw"  parameterType ="hashMap">
+update user_info set user_pw=#{user_pw} where user_key=#{user_key} 
+</update>
+	<!--  바꾼 이메일로 바꾸기 -->
+<update id="changeEmail"  parameterType ="hashMap">
+update user_info set user_email=#{user_email} where user_key=#{user_key}
+</update>	
+<!--  입력된 user key로 UserDTO 가져오기 -->
+<select id = "getUserByUserKey" resultType = "UserDTO" parameterType ="String">
+select * from user_info where user_key=#{user_key}
+</select>
+	<!-- 현재 로그인된 id의 비밀번호 가져오기 -->
+<select id ="getPassword" resultType ="string" parameterType="UserDTO">
+select user_pw from user_info where user_id = #{user_id}
+</select>
+	<!--  내가 본 무비 객체 다가져오기 -->
+<select id="pagingMovieList" resultType="Moviedto" parameterType="int">
+select * from movie_info m, screening_schedule sc, order by writingtime desc limit
+<foreach collection="array" item="num" separator=",">#{num}</foreach>
+</select>
+
+	<!--  내가 쓴 리뷰 게시글 다가져오기 -->
+	
+	
+</mapper>
