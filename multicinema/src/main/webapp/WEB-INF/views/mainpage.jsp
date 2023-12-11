@@ -1,32 +1,15 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"  pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>최고의 영화관. MultiCinema</title>
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<script src="resources/js/jquery-3.7.1.min.js"></script>
+</head>
 <link rel="stylesheet" type="text/css" href="/multicinema/resources/css/index.css">
 </head>
-<header class="body">
-	<div class="header">
-		<h1 class="mainlogo">
-			<a href="main_signout.html" title="홈화면으로 가기">홈으로가기</a>
-		</h1>
-		<div class="myinformation">
-			<a href="login.html">로그인하기</a>
-			<a href="join_confirm.html">회원가입</a>
-			<a href="mypage">마이페이지</a>
-		</div>
-	</div>
-		
-	<hr>
-	<ul id="mainNavigator">
-		<li id="movie"><a href="movie.html">영화</a></li>
-		<li id="ticketing"><a href="timetable_select.html">예매</a></li>
-		<li id="theater"><a href="theater.html">영화관</a></li>
-	</ul>
-	<hr>
-</header>
 <style>
 	html{
 		text-align:center;
@@ -256,7 +239,7 @@ onload = () => {
 </script>
 </head>
 <body>
-		
+<%@ include file="/WEB-INF/views/header/mainheader.jsp" %>
 	<div id="contents"><!--박스오피스 칸-->
 		<div id="boxoffice">박스오피스</div>
 		<div id ="movieChart">

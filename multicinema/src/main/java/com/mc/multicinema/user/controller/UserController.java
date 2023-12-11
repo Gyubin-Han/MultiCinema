@@ -24,6 +24,9 @@ import com.mc.multicinema.user.service.UserService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mc.multicinema.user.dto.UserDTO;
@@ -36,7 +39,6 @@ import com.mc.multicinema.user.service.UserService;
  * 회원 키 가지고 유저 닉네임 가져오는 sql 작성 
  *
  */
-
 @Controller
 public class UserController {
 	
@@ -52,6 +54,19 @@ public class UserController {
 	}
 	List<UserDTO> selectUserAll() {
 		return service.selectUserAll();
+	}
+	
+	@RequestMapping("/logout")
+	public String logoutProcess(HttpSession session) {
+		if(session.getAttribute("login_user_id") != null) {
+			session.removeAttribute("login_user_id");
+			
+			if(session.getAttribute("login_user_name") != null)
+				session.removeAttribute("login_user_name");
+			if(session.getAttribute("login_user_key") != null)
+				session.removeAttribute("login_user_key");
+		}
+		return "redirect:/";
 	}
 	
 	@GetMapping("/login")
@@ -74,6 +89,7 @@ public class UserController {
 			session.setAttribute("login_user_key", dto.getUser_key());
 			session.setAttribute("login_user_name", dto.getUser_name());
 			
+			System.out.println("test" + session.getAttribute("login_user_id"));
 			
 			//세션에 추가할 것
 			//user_key,

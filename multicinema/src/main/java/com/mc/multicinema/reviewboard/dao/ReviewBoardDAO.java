@@ -16,18 +16,23 @@ public class ReviewBoardDAO {
 	SqlSession session;
 	
 	public List<ReviewBoardDTO> selectReviewBoard(ArrayList<Integer> paging) {
-		System.out.println("DAO : selectReviewBoard called");
+		System.out.println("ReviewBoardDAO : selectReviewBoard called");
 		return session.selectList("reviewboard.selectReviewBoard", paging);
 	}
 
 	public int countAllReview() {
-		System.out.println("DAO : countAllReview called");
+		System.out.println("ReviewBoardDAO : countAllReview called");
 		return session.selectOne("reviewboard.countAllReview");
 	}
 
 	public ReviewBoardDTO selectReviewBoard(int board_num) {
-		System.out.println("DAO : selectReviewBoard called");
+		System.out.println("ReviewBoardDAO : selectReviewBoard called");
 		return session.selectOne("reviewboard.selectOneReviewBoard", board_num);
+	}
+
+	public void updateViewCount(int board_num) {
+		System.out.println("ReviewBoardDAO : updateViewCount called");
+		session.update("updateViewCount", board_num);
 	}
 
 }

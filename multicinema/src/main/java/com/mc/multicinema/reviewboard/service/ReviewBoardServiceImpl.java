@@ -17,19 +17,20 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 	
 	@Override
 	public List<ReviewBoardDTO> selectReviewBoard(ArrayList<Integer> paging) {
-		System.out.println("Service : selectReviewBoard called");
+		System.out.println("ReviewBoardService : selectReviewBoard called");
 		return dao.selectReviewBoard(paging);
 	}
 
 	@Override
 	public ReviewBoardDTO selectReviewBoard(int board_num) {
-		System.out.println("Service : selectReviewBoard called");
+		System.out.println("ReviewBoardService : selectReviewBoard called");
+		dao.updateViewCount(board_num);
 		return dao.selectReviewBoard(board_num);
 	}
 	
 	@Override
 	public int countAllReview() {
-		System.out.println("Service : countAllReview called");
+		System.out.println("ReviewBoardService : countAllReview called");
 		return dao.countAllReview();
 	}
 
