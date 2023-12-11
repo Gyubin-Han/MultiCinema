@@ -22,9 +22,16 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 	}
 
 	@Override
+	public ReviewBoardDTO selectReviewBoard(int board_num) {
+		System.out.println("Service : selectReviewBoard called");
+		return dao.selectReviewBoard(board_num);
+	}
+	
+	@Override
 	public int countAllReview() {
 		System.out.println("Service : countAllReview called");
 		return dao.countAllReview();
 	}
+
 
 }

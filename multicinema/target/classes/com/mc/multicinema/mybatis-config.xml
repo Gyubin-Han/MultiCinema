@@ -6,6 +6,12 @@
 
 	<typeAliases>
 		<typeAlias type="com.mc.multicinema.reviewboard.dto.ReviewBoardDTO" alias="reviewboarddto"/>
+		<typeAlias type="com.mc.multicinema.reviewboard.dto.ReviewDetailDTO" alias="reviewdetaildto"/>
+		<typeAlias type="com.mc.multicinema.user.dto.UserDTO" alias="userdto"/>
+		<typeAlias type="com.mc.multicinema.moviecomment.dto.MovieCommentDTO" alias="moviecommentdto"/>
+		<typeAlias type="com.mc.multicinema.reviewreply.dto.ReviewReplyDTO" alias="reviewreplydto"/>
+		<typeAlias type="com.mc.multicinema.reviewreply.dto.ReviewReplyWithLikeDTO" alias="replylikedto"/>
 	</typeAliases>
+	
 	
 </configuration>

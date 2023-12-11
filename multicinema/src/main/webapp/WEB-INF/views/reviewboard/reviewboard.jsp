@@ -1,3 +1,4 @@
+<!-- controller call this "reviewboard/reviewboard" -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,7 +20,7 @@
 			<a href="signin.html">회원가입</a>
 		</div>
 	</div>
-		
+
 	<hr>
 		<ul id="mainNavigator">
 			<li id="movie"><a href="movie.html">영화</a></li>
@@ -35,15 +36,13 @@
 <div>
 	<div id="listOption" style="text-align: right">
 		<select id="viewListOption">
-			<option value="0">==2=====</option>
+			<option value="0">=======</option>
 			<option value="10">10개씩 보기</option>
 			<option value="20">20개씩 보기</option>
 			<option value="50">50개씩 보기</option>
 		</select>
 	</div>
-    <div id="reviewBoard">
-
-    </div>
+    <div id="reviewBoard" style="margin:auto"></div>
 </div>
 
 <script>
@@ -68,7 +67,7 @@ let createListTable = (list) => {
             
             if(b.board_like_count >= 10) tr.style.fontWeight = "bold";
             
-            tr.onclick = () => {window.location.href="/reviewdetail?board_num="+b.board_num};
+            tr.onclick = () => {window.location.href="reviewdetail?board_num="+b.board_num};
 			
             tr.append(createTd(b.board_num));
             tr.append(createTd(b.movie_cd));
@@ -86,19 +85,58 @@ let createListTable = (list) => {
 
 
 
-let createPagingMenu = (size) => {
+let createPagingMenu = () => {
     let div = createDiv("pagingMenu");
-    let board_count;
-    
+    div.style.textAlign = "center";
+
+    $.ajax({
+        url:"countallreview",
+        success:function(count) {
+            let urlParams = new URLSearchParams(window.location.search);
+
+            let max_page = parseInt((count - 1) / limit) + 1;
+            let start_page = parseInt((currentPage-1) / 10) * 10 + 1;
+            let end_page = (start_page + 9) < max_page ? (start_page + 9) : max_page;
+            alert("start_page " + start_page + ", end_page : " + end_page + ", max_page : " + max_page + ", limit : " + limit);
+            div.innerHTML = "<ul style='text-align:center;'>";
+            if(start_page !== 1)
+                div.innerHTML += "<li style='display:inline; margin:6px;'><a style='text-decoration: none; color: black; font:bold' href='board?page="+(start_page-10)+"&limit="+limit+"'/>앞 페이지 보기</a></li>";
+            for(let i = start_page; i <= end_page; i++) {
+                if(currentPage == i) {
+                    div.innerHTML += "<li style='display:inline; margin:6px;><a style='text-decoration: none; color: black; font:bold' href='board?page="+i+"&limit="+limit+"'/>"+i+"</a></li>";
+                } else {
+                    div.innerHTML += "<li style='display:inline; margin:6px;'>"
+                    div.innerHTML += "<a style='text-decoration: none; color: black;' href='board?page="+i+"&limit="+limit+"'/>"+i+"</a></li>";
+                }
+            }
+            if(max_page > end_page)
+                div.innerHTML += "<li style='display:inline; margin:6px;'><a style='text-decoration: none; color: black; font:bold' href='board?page="+(start_page+10)+"&limit="+limit+"'/>뒤 페이지 보기</a></li>";
+            div.innerHTML += "</ul>";
+        },
+        error:function(request, e) {loggingConsole(request, e)}
+    });
+
     return div;
 }
 
 let createSelectSearchOption = () => {
-    let div = createDiv("searchOption");
-
-
-
-    return div;
+    let div = createDiv("footOption");
+	
+	div.innerHTML = `
+		<button onclick="writeBoard()" style="text-align: center;">리뷰 쓰기</button>
+		<div id="searchOption" style="text-align: right; display:inline-block;">
+			<select id="searchMethod">
+				<option value="searchByTitle">게시글 제목으로 검색</option>
+				<option value="searchByName">작성자 이름으로 검색</option>
+				<option value="searchByMovieTitle">영화 제목으로 검색</option>
+			</select>
+			<textarea id="searchText" style="resize:none; height:20px;"></textarea>
+			<button onclick="searchBoardWithText()">검색</button>
+			<button onclick="refreshBoard()">전체글보기</button>
+		</div>
+	`;
+	
+	return div;
 }
 
 window.onload = function() {
@@ -106,8 +144,10 @@ window.onload = function() {
     let board = document.getElementById("reviewBoard");
     
     let urlParams = new URLSearchParams(window.location.search);
-    limit = 10;
-    currentPage = urlParams.get('page');
+    limit = urlParams.get('limit') == null ? 10 : urlParams.get('limit');
+    currentPage = urlParams.get('page') == null ? 1 : urlParams.get('page');
+
+    alert("limit init : " + limit);
     
     $.ajax({
         url:"reviewboard",
@@ -118,7 +158,8 @@ window.onload = function() {
 	});
 
 	$("#viewListOption").on('change', function(e){
-        let limit = $("#viewListOption").val();
+        limit = $("#viewListOption").val();
+        alert("limit" + limit);
         if(limit == 0)
             return ;
 
@@ -139,7 +180,7 @@ window.onload = function() {
     let refreshBoard = (list) => {
         board.innerHTML = "";
         board.append(createListTable(list));
-        board.append(createPagingMenu(list.size()));
+        board.append(createPagingMenu());
         board.append(createSelectSearchOption());
     }
 }

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+문자열이 필요할 떈 #{key}을 붙여서 결과값에 "" 을 생성한다. ex) "value"
+문자열이 필요하지 않으면 ${key}로 "" 없이 작성한다. ex) value
+-->
+<mapper namespace="liketable">
+
+	<select id="selectLikeBoard" parameterType="HashMap">
+	select * from user_like_board where user_key = ${user_key} and board_num = ${board_num}
+	</select>
+	
+	<select id="selectLikeReply" parameterType="HashMap">
+	select * from user_like_reply where user_key = ${user_key} and board_num = ${board_num}
+	</select>
+	
+	<select id="selectLikeComment" parameterType="HashMap">
+	select * from user_like_comment where user_key = ${user_key} and board_num = ${board_num}
+	</select>
+	
+	<select id="selectDislikeBoard" parameterType="HashMap">
+	select * from user_dislike_board where user_key = ${user_key} and board_num = ${board_num}
+	</select>
+	
+	<select id="selectDislikeReply" parameterType="HashMap">
+	select * from user_dislike_reply where user_key = ${user_key} and board_num = ${board_num}
+	</select>
+	
+	<insert id="insertLikeBoard" parameterType="HashMap">
+	insert user_like_board values(${user_key}, ${board_num})
+	</insert>
+	
+	<insert id="insertLikeReply" parameterType="HashMap">
+	insert user_like_reply values(${user_key}, ${board_num})
+	</insert>
+	
+	<insert id="insertLikeComment" parameterType="HashMap">
+	insert user_like_comment values(${user_key}, ${board_num})
+	</insert>
+	
+	<insert id="insertDislikeBoard" parameterType="HashMap">
+	insert user_dislike_board values(${user_key}, ${board_num})
+	</insert>
+	
+	<insert id="insertDislikeReply" parameterType="HashMap">
+	insert user_dislike_reply values(${user_key}, ${board_num})
+	</insert>
+	
+	<delete id="deleteLikeBoard" parameterType="HashMap">
+	delete from user_like_board where user_key = ${user_key} and board_num = ${board_num};
+	</delete>
+	
+	<delete id="deleteLikeReply" parameterType="HashMap">
+	delete from user_like_reply where user_key = ${user_key} and board_num = ${board_num};
+	</delete>
+	
+	<delete id="deleteLikeComment" parameterType="HashMap">
+	delete from user_like_comment where user_key = ${user_key} and board_num = ${board_num};
+	</delete>
+	
+	<delete id="deleteDislikeBoard" parameterType="HashMap">
+	delete from user_dislike_board where user_key = ${user_key} and board_num = ${board_num};
+	</delete>
+	
+	<delete id="deleteDislikeReply" parameterType="HashMap">
+	delete from user_dislike_reply where user_key = ${user_key} and board_num = ${board_num};
+	</delete>
+	
+</mapper>

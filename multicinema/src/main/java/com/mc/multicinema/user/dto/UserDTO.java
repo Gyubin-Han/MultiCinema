@@ -1,5 +1,8 @@
 package com.mc.multicinema.user.dto;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class UserDTO {
 	
 	String user_key;
