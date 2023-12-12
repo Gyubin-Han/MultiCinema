@@ -23,10 +23,18 @@ public class ReviewBoardDTO {
 	int board_dislike_count;
 	int board_comment_count;
 	
+	String movie_title;
+
 	int board_view_count;
 	boolean is_deleted;
 	String deleted_date;
 	
+	public String getMovie_title() {
+		return movie_title;
+	}
+	public void setMovie_title(String movie_title) {
+		this.movie_title = movie_title;
+	}
 	public int getBoard_view_count() {
 		return board_view_count;
 	}

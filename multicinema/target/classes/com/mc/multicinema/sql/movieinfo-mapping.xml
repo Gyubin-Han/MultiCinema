@@ -8,4 +8,7 @@
 	select * from movie_info;
 	</select>
 	
+	<select id="selectMovieTitle" resultType="string" parameterType="int">
+	select movie_title from movie_info where movie_cd = ${movie_cd}
+	</select>
 </mapper>

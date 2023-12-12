@@ -7,4 +7,6 @@ import com.mc.multicinema.movieinfo.dto.MovieDTO;
 public interface MovieInfoService {
 
 	List<MovieDTO> selectMovieTitleAll();
+
+	String selectMovieTitle(int movie_cd);
 }

@@ -17,6 +17,10 @@ public class MovieInfoDAO {
 	public List<MovieDTO> selectMovieTitleAll() {
 		return session.selectList("movieinfo.selectMovieTitleAll");
 	}
+
+	public String selectMovieTitle(int movie_cd) {
+		return session.selectOne("movieinfo.selectMovieTitle", movie_cd);
+	}
 	
 	
 }

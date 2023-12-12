@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,8 +28,9 @@ onload = () => {
     <td style="text-align: right; width: 80px">조회: ${review.board_view_count}</td>
     <td style="text-align: right; width: 80px">댓글: ${review.board_comment_count}</td>
     </tr></table><hr>
+    <h1 style="margin-top: 30px; margin-left:60px; text-align: left;">${movie_title}</h1>
     <div id="reviewContent">
-    <p style="margin-top: 50px; margin-bottom: 50px; text-align: left;">${review.board_content}</p>
+    <p style="margin-top: 50px; margin-bottom: 50px; margin-left:70px; text-align: left;">${review.board_content}</p>
     </div>
     <div id="likeControl">
     <p><img src="resources/images/like.png" id="likeReviewImg" onclick="plusLikeCount(${review.board_num})"></p>
@@ -48,8 +50,8 @@ onload = () => {
 		if(${review.user_key} === user) {
     	div.innerHTML += `
     		<div style="display:inline-block; width:350px; margin:auto; text-align: right;">
-            <input type=button onclick='updateReviewDetail(${review.board_num})' value="수정하기"/>
-            <input type=button onclick='deleteReviewDetail(${review.board_num})' value="삭제하기"/>
+            <input type=button onclick='updateReviewDetail(${review.board_num})' value="수정하기"></input>
+            <input type=button onclick='deleteReviewDetail(${review.board_num})' value="삭제하기"></input>
             </div>
     	`;
     	}
@@ -62,10 +64,18 @@ onload = () => {
     div.innerHTML = `
     <form action="insertReply" onsubmit="return replyCheck()" method="post">
     <textarea name='reply_content' style='width: 800px; height: 200px; resize: none; margin: 0 auto;'></textarea>
-    <input type=hidden id='user_key' value='${login_user_key}'>
-    <input type=hidden id='board_num' value='${review.board_num}'>
+    <input type=hidden name='user_key' value=${login_user_key}>
+    <input type=hidden name='board_num' value=${review.board_num}>
     <input type=submit style='text-align:center; margin:auto;' value='댓글 작성'>
-    </form>`;
+    </form><hr>`;
+    
+    <c:forEach items='${replys}' var='reply'>
+    div.innerHTML += `<hr>
+    <p>${reply.user_id}</p>
+    <p>${reply.reply_write_date}</p>
+    <p>${reply.reply_content}</p>
+    `;
+    </c:forEach>
     
     
     

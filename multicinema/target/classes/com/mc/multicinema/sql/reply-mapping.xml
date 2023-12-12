@@ -8,8 +8,8 @@
 	select * from review_reply where reply_num = {reply_num} and is_deleted = false
 	</select>
 	
-	<select id="selectReplyList" parameterType="HashMap" resultType="reviewreplydto">
-	select * from review_reply where ${search} = #{keyword} and is_deleted = false
+	<select id="selectReplyList" parameterType="int" resultType="reviewreplydto">
+	select *, (select user_id from user_info u where u.user_key = r.user_key) as user_id from review_reply r where board_num = ${board_num} and is_deleted = false
 	</select>
 	
 	<select id="selectReplyLikeList" parameterType="HashMap" resultType="replylikedto">
@@ -19,5 +19,7 @@
 	from review_reply r where reply_num = #{reply_num};
 	</select>
 	
-	
+	<insert id="insertReply" parameterType="writenreplydto">
+	insert into review_reply values(default, ${board_num}, ${user_key}, '${reply_content}', now(), 0, 0, false, null);
+	</insert>
 </mapper>

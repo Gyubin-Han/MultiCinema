@@ -19,4 +19,9 @@ public class MovieInfoServiceImpl implements MovieInfoService {
 		return dao.selectMovieTitleAll();
 	}
 
+	@Override
+	public String selectMovieTitle(int movie_cd) {
+		return dao.selectMovieTitle(movie_cd);
+	}
+
 }

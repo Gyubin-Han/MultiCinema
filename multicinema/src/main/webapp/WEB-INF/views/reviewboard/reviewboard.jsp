@@ -57,7 +57,7 @@ let createListTable = (list) => {
             tr.onclick = () => {window.location.href="reviewdetail?board_num="+b.board_num};
 			
             tr.append(createTd(b.board_num));
-            tr.append(createTd(b.movie_cd));
+            tr.append(createTd(b.movie_title));
             tr.append(createTd(b.board_title));
             tr.append(createTd(b.user_key));
             tr.append(createTd(b.board_write_date));

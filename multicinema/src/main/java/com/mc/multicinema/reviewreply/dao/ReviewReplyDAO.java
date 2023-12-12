@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.mc.multicinema.reviewreply.dto.ReviewReplyDTO;
 import com.mc.multicinema.reviewreply.dto.ReviewReplyWithLikeDTO;
+import com.mc.multicinema.reviewreply.dto.WritenReplyDTO;
 
 @Repository
 public class ReviewReplyDAO {
@@ -20,12 +21,16 @@ public class ReviewReplyDAO {
 		return session.selectOne("reply.selectReplyOne", reply_num);
 	}
 	
-	public List<ReviewReplyDTO> selectReplyList(HashMap<String, String> map) {
-		return session.selectList("reply.selectReplyList", map);
+	public List<ReviewReplyDTO> selectReplyList(int board_num) {
+		return session.selectList("reply.selectReplyList", board_num);
 	}
 	
 	public List<ReviewReplyWithLikeDTO> selectReplyLikeList(HashMap<String, String> map) {
 		return session.selectList("reply.selectReplyLikeList", map);
+	}
+
+	public void insertReply(WritenReplyDTO reply) {
+		session.insert("insertReply", reply);
 	}
 	
 //	public int insertReply(ReviewReplyDTO dto) {

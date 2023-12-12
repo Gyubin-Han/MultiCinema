@@ -111,8 +111,8 @@ public class MovieCommentController {
 	@RequestMapping("/moviedb")
 	public String moviedb() {
 		movieservice.ApiToDB();
-		
-		return "/";
+		System.out.println("====movie_info====\nDB INPUT SUCCESS");
+		return "redirect:/";
 	}
 	
 }

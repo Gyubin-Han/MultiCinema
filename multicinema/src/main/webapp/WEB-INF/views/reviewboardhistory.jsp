@@ -29,7 +29,7 @@
 <table border="3">
 <tr><th>영화 이미지</th><th>영화 이름</th><th>제목</th><th>작성일자</th></tr>
 <c:forEach items="${boardlist }" var="dto">
-<tr><td>${dto.movie_img_src }</td><td>${dto.movie_title }</td><td>${dto.board_title }</td><td>${dto.board_write_date }</td></tr>
+<tr><td><img src="${dto.movie_img_src }"></td><td>${dto.movie_title }</td><td>${dto.board_title }</td><td>${dto.board_write_date }</td></tr>
 </c:forEach>
 </table>
 <h4>페이지 번호를 선택하세요.</h4>
