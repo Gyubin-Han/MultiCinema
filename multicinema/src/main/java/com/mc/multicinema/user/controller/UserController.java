@@ -132,14 +132,14 @@ public class UserController {
 	
 
 	// 회원 정보 수정
-	@RequestMapping("/mypage/authentication")
+	@RequestMapping("/authentication")
 	ModelAndView authentication(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("authentication");
 		return mv;
 	}
 	
-	@PostMapping("/mypage/authenticationresult")
+	@PostMapping("/authenticationresult")
 	ModelAndView authenticationResult(String user_pw, HttpSession session,HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
 		
@@ -160,21 +160,21 @@ public class UserController {
 	
 
 	
-	@RequestMapping("/mypage/changeuserinfo")
+	@RequestMapping("/changeuserinfo")
 	ModelAndView changeUserInfo() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("changeuserinfo");
 		return mv;
 	}
 	
-	@RequestMapping("/mypage/changeemail")
+	@RequestMapping("/changeemail")
 	ModelAndView changeemail() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("changeemail");
 		return mv;
 	}
 	
-	@PostMapping("/mypage/changeemailresult")
+	@PostMapping("/changeemailresult")
 	String changeEmailResult(String user_email, String user_email_again, HttpSession session) {
 		
 		String email_pattern = "^[A-Za-z0-9]{4,12}@[A-Za-z0-9]{1,}.(co.kr|com|net)$";
@@ -195,14 +195,14 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping("/mypage/changepw")
+	@RequestMapping("/changepw")
 	ModelAndView changepw(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("changepw");
 		return mv;
 	}
 	
-	@PostMapping("/mypage/changepwresult")
+	@PostMapping("/changepwresult")
 	String changePwResult(String user_pw, String user_pw_again, HttpSession session) {
 		
 		// 두 입력값이 다른 경우
@@ -218,7 +218,7 @@ public class UserController {
 		}
 	}
 	// 예매 내역 
-	@RequestMapping("/mypage/reservedetail")
+	@RequestMapping("/reservedetail")
 	ModelAndView reserveMovielist(@RequestParam(value="pagenum", required=false , defaultValue="1") int pagenum,HttpSession session ) {
 		int pagecount = 5;
 		int [] limit = new int[2];
@@ -237,7 +237,7 @@ public class UserController {
 	}
 	
 	// 작성 리뷰 게시글 
-	@RequestMapping("/mypage/reviewboardhistory")
+	@RequestMapping("/reviewboardhistory")
 	ModelAndView reviewBoardHistory(@RequestParam(value="pagenum", required=false , defaultValue="1") int pagenum,HttpSession session) {
 		int pagecount = 5;
 		int [] limit = new int[2];

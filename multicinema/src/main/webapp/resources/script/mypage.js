@@ -15,20 +15,20 @@ import{movie_list,user_list,history_list,review_history_list,User,Movie,Movie_wa
 	reserv_detail.addEventListener("click", show_reserve_detail);
 	
 	function show_reserve_detail(){
-		window.location.href = "/multicinema/mypage/reservedetail";
+		window.location.href = "/multicinema/reservedetail";
 	}
 	// 회원 정보 수정 누른경우
 	info_change.addEventListener("click",authentication);	
 	
 	function authentication(){
-		window.location.href = "/multicinema/mypage/authentication";
+		window.location.href = "/multicinema/authentication";
 	}
 	
 	// 작성 리뷰 게시물 누른 경우
 	my_review.addEventListener("click", show_myReview);
 	
 	function show_myReview(){
-		window.location.href="/multicinema/mypage/reviewboardhistory";
+		window.location.href="/multicinema/reviewboardhistory";
 	}
 	
 
