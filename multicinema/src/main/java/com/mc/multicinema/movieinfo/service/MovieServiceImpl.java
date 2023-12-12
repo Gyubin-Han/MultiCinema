@@ -36,9 +36,10 @@ public class MovieServiceImpl implements MovieService{
 	MovieDTO moviedto;
 	@Autowired
 	MovieDAO moviedao;
-
+	
 	public ArrayList<DailyBoxOfficeDTO> dailyBoxOffice() {
-
+		System.out.println("==============================service=======================================");
+		
 		ArrayList<DailyBoxOfficeDTO> list = new ArrayList<DailyBoxOfficeDTO>();
 		try {
 			JSONParser jsonparser = new JSONParser();
@@ -48,7 +49,8 @@ public class MovieServiceImpl implements MovieService{
 			JSONArray array1 = (JSONArray) json1.get("dailyBoxOfficeList");
 
 			for (int i = 0; i < array1.size(); i++) {
-
+				System.out.println("==============================service=======================================");
+				
 				JSONObject entity = (JSONObject) array1.get(i);
 				String movieNm = (String) entity.get("movieNm");
 				if (movieNm.length() >= 13) {

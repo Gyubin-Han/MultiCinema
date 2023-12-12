@@ -17,13 +17,13 @@
 <%@ include file="/WEB-INF/views/header/mainheader.jsp" %>
 <link rel="stylesheet" type="text/css" href="resources/css/mainpage.css">
 <script src="resources/js/jquery-3.7.1.min.js"></script>
-<script src="resources/js/mainpage2_1.js"></script>
+<script src="resources/script/mainpage2_1.js"></script>
 <script>
 
 </script>
 </head>
 <body>
-${login_user_name }
+
 <%
 ArrayList<DailyBoxOfficeDTO> list = (ArrayList<DailyBoxOfficeDTO>)request.getAttribute("movielist");
 double movieListWidth = Math.ceil(list.size()/5 )* 1428;

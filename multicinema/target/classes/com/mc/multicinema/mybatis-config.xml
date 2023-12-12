@@ -13,8 +13,8 @@
 		<typeAlias type="com.mc.multicinema.reviewreply.dto.ReviewReplyWithLikeDTO" alias="replylikedto"/>
 		<typeAlias type="com.mc.multicinema.moviehistory.MovieHistoryDTO" alias="moviehistorydto"/>
 		<typeAlias type="com.mc.multicinema.reviewhistory.ReviewHistoryDTO" alias="reviewhistorydto"/>
-		<typeAlias type="com.mc.multicinema.movieinfo.MovieDTO" alias="moviedto"/>
-		<typeAlias type="com.mc.multicinema.movieinfo.MovieCommentSortDTO" alias="mcosortdto"/>
+		<typeAlias type="com.mc.multicinema.movieinfo.dto.MovieDTO" alias="moviedto"/>
+		<typeAlias type="com.mc.multicinema.moviecomment.dto.MovieCommentSortDTO" alias="mcosortdto"/>
 	</typeAliases>
 	
 	

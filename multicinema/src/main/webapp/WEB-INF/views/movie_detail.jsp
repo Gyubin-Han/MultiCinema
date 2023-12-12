@@ -119,7 +119,7 @@ $(document).ready(function(){
 		
 });
 </script>
-<script src="resources/js/movie_detail_1.js"></script>
+<script src="resources/script/movie_detail_1.js"></script>
 <body>
 <div id="headerInput"></div>
 <!-- body start -->
@@ -132,7 +132,7 @@ if(message != null){
 	session.removeAttribute("message");
 }
 %>
-${login_user_name }
+
 <%MovieDTO moviedto = (MovieDTO)request.getAttribute("moviedto"); %>
 
 <input type="hidden" id="hidden_login_user_id" value="${login_user_id}">
