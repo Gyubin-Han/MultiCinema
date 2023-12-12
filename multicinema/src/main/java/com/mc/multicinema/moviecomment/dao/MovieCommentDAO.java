@@ -91,7 +91,11 @@ public class MovieCommentDAO {
 	
 	public double movieAvgScore(int movie_cd) {
 		System.out.println("dao 작동===============");
-		return session.selectOne("movieAvgScore", movie_cd);
+		if(session.selectOne("movieAvgScore", movie_cd)==null) {
+			return 0;
+		}else {
+			return session.selectOne("movieAvgScore", movie_cd);
+		}
 	}
 	
 }

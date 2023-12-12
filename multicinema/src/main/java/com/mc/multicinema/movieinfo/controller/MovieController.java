@@ -64,4 +64,11 @@ public class MovieController {
 			return mv;	
 		}
 	}
+	
+	@RequestMapping("/moviedb")
+	public String moviedb() {
+		movieservice.ApiToDB();
+		
+		return "/";
+	}
 }

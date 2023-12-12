@@ -39,6 +39,7 @@
 </style>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/header/mainheader.jsp" %>
 <div id="content">
 	<h1>현재 개봉중인 영화</h1>
 	<%ArrayList<MovieDTO> list = (ArrayList<MovieDTO>)request.getAttribute("list");
