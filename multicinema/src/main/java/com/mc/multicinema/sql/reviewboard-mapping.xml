@@ -15,12 +15,60 @@
 	select count(*) from review_board where is_deleted = false
 	</select>
 	
+	
 	<select id="selectOneReviewBoard" resultType="reviewboarddto" parameterType="int">
 	select * from review_board where board_num = ${board_num}
 	</select>
 	
 	<update id="updateViewCount" parameterType="int">
 	update review_board set board_view_count = board_view_count + 1  where board_num = #{board_num}
+	</update>
+	
+	<select id="countSearchReview" parameterType="searchparameter" resultType="int">
+	select count(*) from review_board r
+	join user_info using(user_key)
+	join movie_info using(movie_cd)
+	where r.is_deleted = false and ${search} like concat('%', '${keyword}', '%')
+	</select>
+	
+	<select id="selectSearchBoard" parameterType="searchparameter" resultType="reviewboarddto">
+	select * from review_board r
+	join user_info using(user_key)
+	join movie_info using(movie_cd)
+	where r.is_deleted = false and  ${search} like concat('%', '${keyword}', '%')
+	order by board_write_date desc limit ${startIndex}, ${limit}
+	</select>
+	
+	<insert id="insertReviewBoard" parameterType="writenreviewdto">
+	insert into review_board
+	values(default, ${user_key}, ${movie_cd}, now(), '${board_title}', '${board_content}', now(), default, default, default, default, default, null)
+	</insert>
+	
+	<update id="updateReviewBoard" parameterType="writenreviewdto">
+	update review_board 
+	set board_title='${board_title}', 
+	board_content='${board_content}',
+	movie_cd = ${movie_cd},
+	board_update_date = now()
+	where board_num = ${board_num}
+	</update>
+	
+	<update id="deleteBoard" parameterType="int">
+	update review_board
+	set is_deleted = true
+	where board_num = ${board_num}
+	</update>
+	
+	<update id="minusLike" parameterType="int">
+	update review_board
+	set board_like_count = board_like_count - 1
+	where board_num = ${board_num}
+	</update>
+	
+	<update id="plusLike" parameterType="int">
+	update review_board
+	set board_like_count = board_like_count + 1
+	where board_num = ${board_num}
 	</update>
 	
 </mapper>
