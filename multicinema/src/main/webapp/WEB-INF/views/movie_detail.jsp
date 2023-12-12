@@ -189,7 +189,7 @@ if(message != null){
 	<div id="contents_movie_comments">
 		<h2>한줄평</h2>
 		<div id="comments_sort_btn">
-			<button class = "sort_btn" id="sort_date_btn">날짜 별로 정렬</button><button class = "sort_btn" id="sort_like_btn">좋아요 순으로 정렬</button><button class = "sort_btn" id="sort_score_btn">평점 순으로 정렬</button>
+			<span>정렬 </span><button class = "sort_btn" id="sort_date_btn">최신 순</button><button class = "sort_btn" id="sort_like_btn">좋아요 순</button><button class = "sort_btn" id="sort_score_btn">평점 순</button>
 		</div>
 		<form action="moviedetail" method="post">
 		<div id="write_comments">
@@ -273,7 +273,9 @@ if(message != null){
 				</div>
 			<%} %>
 		</div>
-		<button id="more_comments_btn">더보기 버튼</button>
+		<div id="more_btn_wrap">
+			<button id="more_comments_btn">더보기 버튼</button>
+		</div>
 	</div>
 
 
