@@ -6,15 +6,22 @@ import org.springframework.stereotype.Component;
 public class ReviewReplyDTO {
 	
 	int reply_num;
-	int board_num;
-	int user_key;
-	String reply_content;
+	int board_num; // nead
+	int user_key; // nead
+	String reply_content; // nead
+	String user_id;
 	String reply_write_date;
 	int reply_like_count;
 	int reply_dislike_count;
 	boolean is_deleted;
 	String deleted_date;
 	
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
 	public int getReply_num() {
 		return reply_num;
 	}

@@ -5,7 +5,7 @@
 <mapper namespace="reviewboard">
 
 	<select id="selectReviewBoard" resultType="reviewboarddto" parameterType="int">
-	select * from review_board where is_deleted = false order by board_write_date desc limit
+	select *, (select movie_title from movie_info m where m.movie_cd = r.movie_cd) as movie_title from review_board r where is_deleted = false order by board_write_date desc limit
 		<foreach collection="list" item="num" separator=",">
 		${num}
 		</foreach>
@@ -17,7 +17,7 @@
 	
 	
 	<select id="selectOneReviewBoard" resultType="reviewboarddto" parameterType="int">
-	select * from review_board where board_num = ${board_num}
+	select *, (select movie_title from movie_info m where m.movie_cd = r.movie_cd) as movie_title from review_board r where board_num = ${board_num}
 	</select>
 	
 	<update id="updateViewCount" parameterType="int">
@@ -32,7 +32,7 @@
 	</select>
 	
 	<select id="selectSearchBoard" parameterType="searchparameter" resultType="reviewboarddto">
-	select * from review_board r
+	select *, (select movie_title from movie_info m where m.movie_cd = r.movie_cd) as movie_title from review_board r
 	join user_info using(user_key)
 	join movie_info using(movie_cd)
 	where r.is_deleted = false and  ${search} like concat('%', '${keyword}', '%')

@@ -1,6 +1,7 @@
 package com.mc.multicinema.reviewboard.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -17,9 +18,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mc.multicinema.movieinfo.dto.MovieDTO;
 import com.mc.multicinema.movieinfo.service.MovieInfoService;
 import com.mc.multicinema.reviewboard.dto.ReviewBoardDTO;
+import com.mc.multicinema.reviewboard.dto.ReviewDetailDTO;
 import com.mc.multicinema.reviewboard.dto.SearchParameterDTO;
 import com.mc.multicinema.reviewboard.dto.WritenReviewDTO;
 import com.mc.multicinema.reviewboard.service.ReviewBoardService;
+import com.mc.multicinema.reviewreply.dto.ReviewReplyWithLikeDTO;
+import com.mc.multicinema.reviewreply.dto.WritenReplyDTO;
+import com.mc.multicinema.reviewreply.service.ReviewReplyService;
 import com.mc.multicinema.user.service.UserService;
 
 /**
@@ -35,6 +40,15 @@ public class ReviewBoardController {
 	UserService userService;
 	@Autowired
 	MovieInfoService movieService;
+	@Autowired
+	ReviewReplyService replyService;
+	
+	@PostMapping("/insertReply")
+	public String insertReply(WritenReplyDTO reply) {
+		replyService.insertReply(reply);
+
+		return "redirect:reviewdetail?board_num="+reply.getBoard_num();
+	}
 	
 	@RequestMapping("/board")
 	public String reviewBoardHome() {
@@ -99,6 +113,7 @@ public class ReviewBoardController {
 		}
 		
 		ReviewBoardDTO dto = service.selectReviewBoard(board_num);
+		
 		if(dto == null) {
 			mv.addObject("errormsg", "올바른 게시물 번호를 입력하세요.");
 			mv.setViewName("redirect:board");
@@ -106,6 +121,8 @@ public class ReviewBoardController {
 			mv.addObject("errormsg", "삭제된 게시물입니다.");
 			mv.setViewName("redirect:board");
 		} else {
+			mv.addObject("movie_title",movieService.selectMovieTitle(dto.getMovie_cd()));
+			mv.addObject("replys",replyService.selectReplyList(board_num));
 			mv.addObject("review", dto);
 			mv.addObject("user", userService.selectUserOne(dto.getUser_key()));
 			mv.setViewName("reviewboard/reviewdetail");

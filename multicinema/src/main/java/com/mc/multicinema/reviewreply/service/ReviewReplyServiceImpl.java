@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.mc.multicinema.reviewreply.dao.ReviewReplyDAO;
 import com.mc.multicinema.reviewreply.dto.ReviewReplyDTO;
 import com.mc.multicinema.reviewreply.dto.ReviewReplyWithLikeDTO;
+import com.mc.multicinema.reviewreply.dto.WritenReplyDTO;
 
 @Service
 public class ReviewReplyServiceImpl implements ReviewReplyService {
@@ -22,15 +23,8 @@ public class ReviewReplyServiceImpl implements ReviewReplyService {
 	}
 
 	@Override
-	public List<ReviewReplyDTO> selectReplyList(HashMap<String, String> map) {
-		return dao.selectReplyList(map);
-	}
-
-	public List<ReviewReplyDTO> selectReplyList(String search, String keyword) {
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("search", search);
-		map.put("keyword", keyword);
-		return selectReplyList(map);
+	public List<ReviewReplyDTO> selectReplyList(int board_num) {
+		return dao.selectReplyList(board_num);
 	}
 	
 	@Override
@@ -43,5 +37,11 @@ public class ReviewReplyServiceImpl implements ReviewReplyService {
 		map.put("user_key", user_key);
 		map.put("reply_num", reply_num);
 		return selectReplyLikeList(map);
+	}
+
+	@Override
+	public void insertReply(WritenReplyDTO reply) {
+		dao.insertReply(reply);
+		
 	}
 }

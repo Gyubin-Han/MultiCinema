@@ -15,6 +15,7 @@
 		<typeAlias type="com.mc.multicinema.moviecomment.dto.MovieCommentDTO" alias="moviecommentdto"/>
 		<typeAlias type="com.mc.multicinema.reviewreply.dto.ReviewReplyDTO" alias="reviewreplydto"/>
 		<typeAlias type="com.mc.multicinema.reviewreply.dto.ReviewReplyWithLikeDTO" alias="replylikedto"/>
+		<typeAlias type="com.mc.multicinema.reviewreply.dto.WritenReplyDTO" alias="writenreplydto"/>
 		<typeAlias type="com.mc.multicinema.moviehistory.MovieHistoryDTO" alias="moviehistorydto"/>
 		<typeAlias type="com.mc.multicinema.reviewhistory.ReviewHistoryDTO" alias="reviewhistorydto"/>
 		<typeAlias type="com.mc.multicinema.movieinfo.dto.MovieDTO" alias="moviedto"/>
