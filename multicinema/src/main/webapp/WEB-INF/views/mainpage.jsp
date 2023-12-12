@@ -24,7 +24,7 @@
 </head>
 <body>
 
-<%
+<%	
 ArrayList<DailyBoxOfficeDTO> list = (ArrayList<DailyBoxOfficeDTO>)request.getAttribute("movielist");
 double movieListWidth = Math.ceil(list.size()/5 )* 1428;
 %>

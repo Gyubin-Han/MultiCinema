@@ -20,7 +20,7 @@
 		<ul id="mainNavigator">
 			<li id="movie"><a href="moviedetail">영화</a></li>
 			<li id="ticketing"><a href="tiketing.html">예매</a></li>
-			<li id="theater"><a href="theater.html">영화관</a></li>
+			<li id="theater"><a href="moviedetail">영화관</a></li>
             <li id="board"><a href="board">영화리뷰</a></li>
 		</ul>
 	<hr>

@@ -30,7 +30,6 @@ public class MovieController {
 		
 		ArrayList<DailyBoxOfficeDTO> list = movieservice.dailyBoxOffice();
 		System.out.println("==============================controller=======================================");
-		System.out.println(list.get(0).getMovie_title());
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("movielist", list);
 		mv.setViewName("mainpage");

@@ -7,24 +7,24 @@
 -->
 <mapper namespace="liketable">
 
-	<select id="selectLikeBoard" parameterType="HashMap">
-	select * from user_like_board where user_key = ${user_key} and board_num = ${board_num}
+	<select id="selectLikeBoard" parameterType="HashMap" resultType="totalliketable">
+	select * from user_like_board where user_key = ${user_key} and board_num = ${board_num} limit 1
 	</select>
 	
-	<select id="selectLikeReply" parameterType="HashMap">
-	select * from user_like_reply where user_key = ${user_key} and board_num = ${board_num}
+	<select id="selectLikeReply" parameterType="HashMap" resultType="totalliketable">
+	select * from user_like_reply where user_key = ${user_key} and board_num = ${board_num} limit 1
 	</select>
 	
-	<select id="selectLikeComment" parameterType="HashMap">
-	select * from user_like_comment where user_key = ${user_key} and board_num = ${board_num}
+	<select id="selectLikeComment" parameterType="HashMap" resultType="totalliketable">
+	select * from user_like_comment where user_key = ${user_key} and board_num = ${board_num} limit 1
 	</select>
 	
-	<select id="selectDislikeBoard" parameterType="HashMap">
-	select * from user_dislike_board where user_key = ${user_key} and board_num = ${board_num}
+	<select id="selectDislikeBoard" parameterType="HashMap" resultType="totalliketable">
+	select * from user_dislike_board where user_key = ${user_key} and board_num = ${board_num} limit 1
 	</select>
 	
-	<select id="selectDislikeReply" parameterType="HashMap">
-	select * from user_dislike_reply where user_key = ${user_key} and board_num = ${board_num}
+	<select id="selectDislikeReply" parameterType="HashMap" resultType="totalliketable">
+	select * from user_dislike_reply where user_key = ${user_key} and board_num = ${board_num} limit 1
 	</select>
 	
 	<insert id="insertLikeBoard" parameterType="HashMap">
