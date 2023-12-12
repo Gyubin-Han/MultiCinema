@@ -17,18 +17,8 @@
 	</select>
 	
 	<insert id="insertMovieComment" parameterType="moviecommentdto">
-	insert into movie_comment values(
-		default, <!-- comment_num auto_increment -->
-		#{user_key}, <!-- user_key -->
-		#{movie_cd}, <!-- movie_cd -->
-		now(), <!-- comment_write_date -->
-		${comment_content}, <!-- comment_content -->
-		default, <!-- is_deleted false -->
-		null, <!-- deleted_date -->
-		default, <!-- comment_like 0 -->
-		#{comment_score} <!-- comment_score -->
-		) 
-	
+	insert into movie_comment(user_key, comment_write_date, movie_cd, comment_content, comment_score) 
+	values(#{user_key}, now(), #{movie_cd}, #{comment_content}, #{comment_score})
 	</insert>
 	
 	<select id="selectMovieCommentInit" parameterType="hashmap" resultType="moviecommentdto">

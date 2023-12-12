@@ -80,6 +80,7 @@ public class MovieServiceImpl implements MovieService{
 					
 				String movieImgSrc = moviedao.selectMovieImgSrc(movieCd);
 				double avgScore = mcommentdao.movieAvgScore(movieCd);
+				
 				double avgScoreRound= Math.round(avgScore * 100)/100.0;
 				System.out.println("ser 작동===============");
 				

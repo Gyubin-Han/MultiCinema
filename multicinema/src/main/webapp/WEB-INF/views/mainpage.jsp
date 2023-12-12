@@ -66,7 +66,7 @@ double movieListWidth = Math.ceil(list.size()/5 )* 1428;
 							</div>
 							<div class = "movie_btn">
 								<div class = "ticket_btn"><a href=""> 예매하기 </a></div>
-								<div class = "review_btn"><a href=""> 리뷰보기 </a></div>
+								<div class = "review_btn"><a href="board"> 리뷰보기 </a></div>
 							</div>
 						</div>
 					<%} %>	
