@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.mc.multicinema.likecount.dto.TotalLikeTableDTO;
+
 /**
  * 
  * @author JIN
@@ -20,23 +22,23 @@ public class LikeCountDAO {
 	SqlSession session;
 
 	public boolean selectLikeBoard(HashMap<String, Integer> keys) {
-		return session.selectOne("liketable.selectLikeBoard", keys) != null ? true : false;
+		return session.selectList("selectLikeBoard", keys).size() != 0 ? true : false;
 	}
 
 	public boolean selectLikeReply(HashMap<String, Integer> keys) {
-		return session.selectOne("liketable.selectLikeReply", keys) != null ? true : false;
+		return session.selectList("liketable.selectLikeReply", keys).size() != 0 ? true : false;
 	}
 	
 	public boolean selectLikeComment(HashMap<String, Integer> keys) {
-		return session.selectOne("liketable.selectLikeComment", keys) != null ? true : false;
+		return session.selectList("liketable.selectLikeComment", keys).size() != 0 ? true : false;
 	}
 	
 	public boolean selectDislikeBoard(HashMap<String, Integer> keys) {
-		return session.selectOne("liketable.selectDislikeBoard", keys) != null ? true : false;
+		return session.selectList("liketable.selectDislikeBoard", keys).size() != 0 ? true : false;
 	}
 	
 	public boolean selectDislikeReply(HashMap<String, Integer> keys) {
-		return session.selectOne("liketable.selectDislikeReply", keys) != null ? true : false;
+		return session.selectList("liketable.selectDislikeReply", keys).size() != 0 ? true : false;
 	}
 
 	public int insertLikeBoard(HashMap<String, Integer> keys) {
