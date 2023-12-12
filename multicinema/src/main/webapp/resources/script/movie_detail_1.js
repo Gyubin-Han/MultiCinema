@@ -2,7 +2,7 @@ $(document).ready(function(){
 	
 	 //moviedetail 시작시에 처음 페이지에는 몇개를 띄워줄지 정보를 넘겨받는 걸로
 	let commentsCount = 10;
-	let commentsStart = 0;
+	let commentsStart = 10;
 	let hidden_movie_cd = $("#hidden_movie_cd").val();
 	let hidden_login_user_id = $("#hidden_login_user_id").val();
 	
