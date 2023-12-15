@@ -1,5 +1,8 @@
 package com.mc.multicinema.screeningschedule.dto;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ScreeningScheduleDTO {
 	
 	int sch_id;

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="scq">
+
+	<!-- <resultMap id="scqResult" type="com.mc.multicinema.screeningschedule.dto.ScreeningScheduleQueryResultDTO">
+        <id property="orderId" column="order_id"/>
+        <result property="orderDate" column="order_date"/>
+        <collection property="orderItems" ofType="OrderItemDTO" columnPrefix="item_">
+            <id property="itemId" column="item_id"/>
+            <result property="itemName" column="item_name"/>
+            <result property="quantity" column="quantity"/>
+        </collection>
+    </resultMap> -->
+
+    <resultMap id="scqResult" type="com.mc.multicinema.screeningschedule.dto.ScreeningScheduleQueryResultDTO">
+        <result property="movieCd" column="movie_cd"/>
+        <result property="movieTitle" column="movie_title"/>
+        <result property="movieShowTm" column="movie_showTm"/>
+        <result property="cinemaId" column="cinema_id"/>
+        <result property="cinemaName" column="cinema_name"/>
+        <result property="theaterId" column="theater_id"/>
+        <result property="theaterName" column="theater_name"/>
+        <result property="theaterSeatCount" column="total_seat_count"/>
+        <result property="schId" column="schId"/>
+        <result property="schTime" column="sch_time"/>
+    </resultMap>
+    
+    <!--  date -> movie 를 전송하기 위한 dto  -->
+    <resultMap id="queryDateToMovieResult" type="com.mc.multicinema.screeningschedule.dto.ScreeningScheduleQueryDateDTO">
+        <result property="movieCd" column="movie_cd"/>
+        <result property="movieTitle" column="movie_title"/>
+        <result property="movieLimitAge" column="movie_limitage"/>
+    </resultMap>
+    
+    <!--  date,movie -> Theater,Times 를 전송하기 위한 dto  -->
+    <resultMap id="queryDateMovieToTimesResult" type="com.mc.multicinema.screeningschedule.dto.ScreeningScheduleQueryDateMovieResultBeforeDTO">
+    	<result property="theaterId" column="theater_id"/>
+    	<result property="theaterName" column="theater_name"/>
+        <result property="theaterMaxPeople" column="theaterMaxPeople"/>
+        <result property="schId" column="schId"/>
+        <result property="schDateTime" column="schDateTime"/>
+        <result property="nowPeople" column="now_people"/>
+    </resultMap>
+
+<!--    <resultMap id="dd" type="com.mc.multicinema.screeningschedule.dto.ScreeningScheduleQueryDateMovieBeforeDTO">-->
+<!--        <result property="theaterName" column="theaterName"/>-->
+<!--        <result property="theaterMaxPeople" column=""/>-->
+<!--    </resultMap>-->
+
+    <select id="queryResultMovie" resultMap="scqResult" parameterType="java.lang.String">
+    	<![CDATA[
+	        SELECT s.movie_cd, movie_title, movie_showTm, cn.cinema_id, cinema_name, th.theater_id, theater_name, total_seat_count, sch_id, sch_time
+	        FROM screening_schedule s
+	        LEFT JOIN movie_info mv ON s.movie_cd=mv.movie_cd
+			LEFT JOIN theater th ON s.theater_id=th.theater_id
+			LEFT JOIN cinema cn ON th.cinema_id=cn.cinema_id
+			WHERE mv.movie_cd=#{movie_cd};
+		]]>
+    </select>
+
+	<select id="queryResultDate" resultMap="scqResult">
+		<![CDATA[
+	        SELECT s.movie_cd, movie_title, movie_showTm, cn.cinema_id, cinema_name, th.theater_id, theater_name, total_seat_count, sch_id, sch_time
+	        FROM screening_schedule s
+	        LEFT JOIN movie_info mv ON s.movie_cd=mv.movie_cd
+			LEFT JOIN theater th ON s.theater_id=th.theater_id
+			LEFT JOIN cinema cn ON th.cinema_id=cn.cinema_id
+			<!-- WHERE concat(year(sch_time),month(sch_time),day(sch_time))=#{date}; -->
+	        WHERE sch_time=${date};
+        ]]>
+    </select>
+
+	<!--  date 값을 기준으로 날짜에 상영하는 영화 정보 조회  -->
+    <select id="queryDateToMovies" resultMap="queryDateToMovieResult">
+	    <![CDATA[
+	        SELECT DISTINCT mi.movie_cd, movie_title, movie_limitage
+	        FROM screening_schedule sc
+	        LEFT JOIN movie_info mi ON sc.movie_cd=mi.movie_cd
+	        WHERE sch_time >=#{selectDate} AND sch_time < DATE_ADD(#{selectDate},INTERVAL 1 DAY);
+        ]]>
+    </select>
+
+	<!--  date,movie 값을 기준으로 날짜에 상영하는 영화의 상영 일정 정보 조회  -->
+	<select id="queryDateMovieToTimes" resultMap="queryDateMovieToTimesResult" parameterType="com.mc.multicinema.screeningschedule.dto.ScreeningScheduleQueryDateMovieDTO">
+    <![CDATA[
+	        SELECT th.theater_id, th.theater_name,th.total_seat_count AS theaterMaxPeople,sc.sch_id AS schId,sc.sch_time AS schDateTime,COUNT(seat_id) AS now_people
+	        FROM screening_schedule sc
+	        LEFT JOIN theater th ON sc.theater_id=th.theater_id
+			LEFT JOIN seat st ON sc.sch_id=st.sch_id
+			LEFT JOIN movie_info mi ON sc.movie_cd=mi.movie_cd
+			LEFT JOIN cinema cn ON th.cinema_id=cn.cinema_id
+	        WHERE sc.movie_cd=#{selectMovie} AND sch_time >=#{selectDate} AND sch_time < DATE_ADD(#{selectDate},INTERVAL 1 DAY)
+	        GROUP BY sc.sch_id;
+        ]]>
+    </select>
+	
+    <!-- <select id="queryMovieToTheater" resultMap="" parameterType="">
+        SELECT th.theater_id, th.theater_name AS theaterName,th.total_seat_count AS theaterMaxPeople,sh.sch_id AS schId,sh.sch_time AS schDateTime
+        FROM screening_schedule sh
+        LEFT JOIN theater th ON sh.theater_id=th.theater_id;
+    </select> -->
+</mapper>

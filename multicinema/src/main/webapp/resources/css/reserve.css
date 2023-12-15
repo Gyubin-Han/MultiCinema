@@ -16,6 +16,9 @@
 	background-color:lightgray;
 }
 .select_time{
-	padding:7px;
+	padding:5px 15px;
 	margin:2px;
+}
+.select_time:hover{
+	background-color:lightgreen;
 }

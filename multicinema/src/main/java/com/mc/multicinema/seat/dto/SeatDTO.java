@@ -2,9 +2,9 @@ package com.mc.multicinema.seat.dto;
 
 public class SeatDTO {
 	
-	String seat_id;
-	int sch_id;
-	String seat_name;
+	String seat_id;   // 좌석 고유 id
+	int sch_id;   // 상영 일정 id
+	String seat_name;   // 좌석번호
 	
 	public String getSeat_id() {
 		return seat_id;
