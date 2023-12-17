@@ -32,17 +32,17 @@ public class SeatImplDAO implements SeatDAO{
 		else{ return false; }
 	}
 
-	public List<String> isAllEmptySeat(SeatDTO dto) {
+	public List<String> getSeatAll(int schId) {
 		SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
 		SqlSessionFactory factory=null;
 		try {
-			factory = builder.build(Resources.getResourceAsReader("seat/mapper/seat-config.xml"));
+			factory = builder.build(Resources.getResourceAsReader("/mybatis-config.xml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		SqlSession session = factory.openSession();
 
-		List<String> result=session.selectList("isAllEmptySeat");
+		List<String> result=session.selectList("seat.getSeatAll",schId);
 		session.close();
 
 		return result;

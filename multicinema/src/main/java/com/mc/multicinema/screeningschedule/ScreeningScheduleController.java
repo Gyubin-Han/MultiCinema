@@ -86,7 +86,7 @@ public class ScreeningScheduleController {
 		result.put("dataCnt",list.size());
 		result.put("timeTable",list);
 		for(ScreeningScheduleQueryDateMovieResultBeforeDTO d:list) {
-			System.out.println(d.getSchId()+" "+d.getTheaterId()+" "+d.getTheaterName()+" "+d.getSchDateTime()+" "+d.getNowPeople()+"/"+d.getTheaterMaxPeople());
+			System.out.println(d.getSchId()+" "+d.getTheaterId()+" "+d.getTheaterName()+" "+d.getSchDate()+" "+d.getNowPeople()+"/"+d.getTheaterMaxPeople());
 		}
 
 		return result;

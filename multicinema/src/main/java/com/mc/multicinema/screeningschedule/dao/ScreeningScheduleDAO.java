@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 
 import com.mc.multicinema.screeningschedule.dto.ScreeningScheduleQueryDTO;
 import com.mc.multicinema.screeningschedule.dto.ScreeningScheduleQueryResultDTO;
+import com.mc.multicinema.screeningschedule.dto.ScreeningScheduleToTicketingDTO;
 
 // 상영 일정 DAO
 @Repository("ssdao")
@@ -107,6 +108,26 @@ public class ScreeningScheduleDAO {
 		System.out.println(result.size());
 		System.out.println("객체 : "+result);
 		System.out.println("응답 완료");
+		return result;
+	}
+	
+	// 해당 상영일정 id를 기준으로 상영관련 정보를 반환
+	public ScreeningScheduleToTicketingDTO getScreeningSceduleInfo(int schId) {
+		SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
+		SqlSessionFactory factory=null;
+		try {
+			factory = builder.build(Resources.getResourceAsReader("/mybatis-config.xml"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		SqlSession session = factory.openSession();
+
+		ScreeningScheduleToTicketingDTO result=session.selectOne("scq.queryTicketingScreeningScheduleInfo",schId);
+		
+		// 테스트
+		System.out.println(result.getSchId()+" "+result.getMovieTitle()+" "+result.getCinemaName()+" "+result.getTheaterName()+" : "+result.getSchDateTime().toString());
+		session.close();
+
 		return result;
 	}
 }

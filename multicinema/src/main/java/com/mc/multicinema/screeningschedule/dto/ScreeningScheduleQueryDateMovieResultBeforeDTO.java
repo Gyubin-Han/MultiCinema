@@ -11,7 +11,8 @@ public class ScreeningScheduleQueryDateMovieResultBeforeDTO {
     int theaterMaxPeople;   // 상영관 최대 좌석 수
     int schId;   // 상영 일정 코드
 //    LocalDateTime schDateTime;   // 상영 일정 날짜 및 시간
-    String schDateTime;
+    String schDate;
+    String schTime;
     int nowPeople;   // 현재 인원 수 (조회 시, COUNT 함수 사용)
 
     public String getTheaterName() {
@@ -38,12 +39,20 @@ public class ScreeningScheduleQueryDateMovieResultBeforeDTO {
         this.schId = schId;
     }
 
-    public String getSchDateTime() {
-        return schDateTime;
+    public String getSchDate() {
+        return schDate;
     }
 
-    public void setSchDateTime(LocalDateTime schDateTime) {
-        this.schDateTime = schDateTime.toString().split("T")[1];
+    public void setSchDate(LocalDateTime schDateTime) {
+        this.schDate = schDateTime.toString().split("T")[0];
+    }
+    
+    public String getSchTime() {
+        return schTime;
+    }
+
+    public void setSchTime(LocalDateTime schDateTime) {
+        this.schTime = schDateTime.toString().split("T")[1];
     }
 
 	public int getTheaterId() {

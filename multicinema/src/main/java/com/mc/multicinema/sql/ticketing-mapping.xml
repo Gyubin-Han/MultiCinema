@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="a">
+
+<!-- <resultMap id="dto" type="ticketingDTO">
+	<result property="ticketing_num" column="ticketing_num"/>
+	<result property="user_key" column="user_key"/>
+	<result property="seat_id" column="seat_id"/>
+</resultMap>-->
+
+<select id="now" resultType="String">
+	SELECT NOW();
+</select>
+
+</mapper>

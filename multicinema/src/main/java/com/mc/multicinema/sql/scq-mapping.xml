@@ -43,8 +43,18 @@
     	<result property="theaterName" column="theater_name"/>
         <result property="theaterMaxPeople" column="theaterMaxPeople"/>
         <result property="schId" column="schId"/>
-        <result property="schDateTime" column="schDateTime"/>
+        <result property="schDate" column="schDateTime"/>
+        <result property="schTime" column="schDateTime"/>
         <result property="nowPeople" column="now_people"/>
+    </resultMap>
+    
+    <!-- 예매에서 사용하는 필수  -->
+    <resultMap id="toTicketingScreeningScheduleInfo" type="com.mc.multicinema.screeningschedule.dto.ScreeningScheduleToTicketingDTO">
+    	<result property="schId" column="sch_id"/>
+    	<result property="movieTitle" column="movie_title"/>
+    	<result property="schDateTime" column="sch_time"/>
+    	<result property="cinemaName" column="cinema_name"/>
+    	<result property="theaterName" column="theater_name"/>
     </resultMap>
 
 <!--    <resultMap id="dd" type="com.mc.multicinema.screeningschedule.dto.ScreeningScheduleQueryDateMovieBeforeDTO">-->
@@ -98,6 +108,19 @@
 	        GROUP BY sc.sch_id;
         ]]>
     </select>
+    
+    <select id="queryTicketingScreeningScheduleInfo" resultMap="toTicketingScreeningScheduleInfo" parameterType="java.lang.Integer">
+    <![CDATA[
+    	SELECT sch_id, movie_title, cinema_name, theater_name, sch_time
+    	FROM screening_schedule sc
+    	LEFT JOIN theater th ON sc.theater_id=th.theater_id
+    	LEFT JOIN cinema cn ON th.cinema_id=cn.cinema_id
+    	LEFT JOIN movie_info mv ON sc.movie_cd=mv.movie_cd
+    	WHERE sch_id=#{schId};
+    ]]>
+    </select> 
+    
+	
 	
     <!-- <select id="queryMovieToTheater" resultMap="" parameterType="">
         SELECT th.theater_id, th.theater_name AS theaterName,th.total_seat_count AS theaterMaxPeople,sh.sch_id AS schId,sh.sch_time AS schDateTime

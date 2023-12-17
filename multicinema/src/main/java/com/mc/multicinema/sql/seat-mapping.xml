@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="seat">
+
+	<!-- <resultMap id="scqResult" type="com.mc.multicinema.screeningschedule.dto.ScreeningScheduleQueryResultDTO">
+        <id property="orderId" column="order_id"/>
+        <result property="orderDate" column="order_date"/>
+        <collection property="orderItems" ofType="OrderItemDTO" columnPrefix="item_">
+            <id property="itemId" column="item_id"/>
+            <result property="itemName" column="item_name"/>
+            <result property="quantity" column="quantity"/>
+        </collection>
+    </resultMap> -->
+
+    <resultMap id="seat" type="com.mc.multicinema.seat.dto.SeatDTO">
+        <result property="seatId" column="seat_id"/>
+        <result property="schId" column="sch_id"/>
+        <result property="seatName" column="seat_name"/>
+    </resultMap>
+
+    <!-- <select id="isEmptySeat" resultMap="seat" parameterType="SeatDTO">
+    	<![CDATA[
+	        SELECT COUNT(*) FROM seat WHERE sch_id=#{sch_id} AND seat_name=#{seat_name};
+		]]>
+    </select>
+
+    <select id="isAllEmptySeat" resultMap="seat" parameterType="SeatDTO">
+    	<![CDATA[
+        	SELECT COUNT(*) FROM seat WHERE sch_id=#{sch_id} AND seat_name=#{seat_name};
+        ]]>
+    </select>-->
+    
+    <select id="getSeatAll" resultType="java.lang.String" parameterType="java.lang.Integer">
+    	<![CDATA[
+    		SELECT seat_name FROM seat WHERE sch_id=#{sch_id};
+    	]]>
+    </select>
+
+    <select id="countPeople" parameterType="int">
+        <![CDATA[
+            SELECT COUNT(*) FROM seat WHERE sch_id=#{sch_id};
+        ]]>
+    </select>
+</mapper>
